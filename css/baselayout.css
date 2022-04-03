@@ -1,13 +1,14 @@
+
+
 body{
 	text-size-adjust:none;
 	background-color: #c9c9c9;
 	margin: 0;
 }
 #page-container{
-	overflow: auto;
+	
 	width: 100%;
-	block-size:100vw;
-	height: 100%;
+	
 }
 #page-header{
 	background-color: cornflowerblue;
@@ -52,25 +53,37 @@ body{
 	margin: auto;
 }
 #page-left-container{
-	width: 33.3%;
-	background-color: aliceblue;
+	width: 33%;
 	height: 1080px;
 	float: left;
 }
 
+#page-left-container div{
+	width: 100%;
+	border: 3px solid #ffffff;
+	border-radius: 5px;
+	background-color: #ffffff;
+}
+
+#showmyself{
+	text-align: center;
+	margin: auto;
+}
+
 #page-right-container{
-	width: 66.6%;
+	width: 66%;
 	height: 1080px;
 	float: right;
 	
 }
-#page-right{
+#page-right-container div{
 	width: 100%;
-	height: 100%;
-	border: 2px solid #ffffff;
-	border-radius: 10px;
+	border: 3px solid #ffffff;
+	border-radius: 5px;
 	background-color: #ffffff;
 }
+
+
 .toolbar {
 	float: right;
 	margin-inline-end: 4px;
@@ -100,3 +113,4 @@ body{
 	border-start-end-radius: 8px;
 	border-end-end-radius: 8px;
 }
+
