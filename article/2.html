@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="utf-8" />
+	<title>ybycs的博客</title>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+	</script>
+	<link rel="stylesheet" type="text/css" href="/css/baselayout.css">
+	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+	<script>
+		$(".article-url").removeAttr("href");
+	</script>
+</head>
+
+<body lang="zh">
+	<div id="page-container">
+		<div id="page-header">
+			<div id="header-container">
+				<a href="/" rel="noopener">
+					<span>首页</span>
+				</a>
+				<a href="/summary" rel="noopener">
+					<span>汇总</span>
+				</a>
+				<a href="/friendlink" rel="noopener">
+					<span>友链</span>
+				</a>
+				<a href="/about" rel="noopener">
+					<span>关于</span>
+				</a>
+				<a href="/massage" rel="noopener">
+					<span>留言</span>
+				</a>
+				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;" title="Download on GitHub">
+					<i class="fab fa-github "></i>
+				</a>
+				
+				<a  href="/" style="float:right;" rel="noopener" >
+					<i class="fas fa-search"></i>
+				</a>
+			</div>
+		</div>
+		<div id="page-body">
+			<div id="content-container" >
+				<div class="toolbar"></div>
+				<div id="page-content" >
+					<!-- 左界面 -->
+					<div id="page-left-container">
+						<div id="showmyself">
+							
+							<img src="/img/Himeno Sena.jpg" width="75%"/>
+							<h1 style="margin: 1px;">YBYCS</h1>
+							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
+							
+							<a style="color: black;" target="_blank" rel="noopener" title="Email" href="mailto:1738146845@qq.com">
+								<i class="fas fa-envelope"></i>
+							</a>
+						</div>
+					</div>
+					<!-- 右界面 -->
+					<div id="page-right-container">
+						<div class="article-container">
+							<div id="article-lead">
+								<h1 class="article-title">
+									<a class="article-url" href="/article/1.html">静态博客介绍</a>
+								</h1>
+								<h2>静态博客是什么</h2>
+								<p>所谓静态博客，即通过生成工具（eg：Hexo；Hugo等），直接将作者所书写的博文编译成最终的 html；css；js 等静态文件。作者/博主，只需将生成的文件部署在静态 server 上面即可被在互联网中访问。 用户通过浏览器访问服务器，直接就回获得已编译的静态资源。</p>
+							</div>
+							<div id="article-more">
+								<h2>静态百科的优缺点</h2>
+								
+								<p>
+									<h3>优点</h3>
+									<ol>
+										<li>速度极快，因为当用户访问博客时，只用从服务器（如nginx）调取编译好的静态资源即可，无需实时从数据库查询获取博文、图片、评论、访问量等资源，效率极高，打开网站的速度会非常快速 ！</li>
+										<li>作者可以专心生产博文，不用管服务器维护等琐事，基本不需要维护，折腾党除外。</li>
+										<li>成本低，市面上有很多开源免费的托管程序（如 gayhub；gitee；coding 等），不用担心高昂的服务器费用。</li>										</li>
+										
+									</ol>
+									<h3>缺点</h3>
+									<ol>
+										<li>硬伤，无法支持原生评论，访问量统计，注册登录等功能。</li>
+										<li>操作繁琐，虽然前面提到静态博客不用管服务器维护；不用担心高昂的服务器费用，但是没有后台管理的它，靠手动编译，如果在原基础上改动过多（美化；增删功能），将难以维护！！！</li>
+										<li>上手难， 由于无后台管理功能，那么静态博客对新手菜鸟来说真的是难以使用，不懂 HTML、JS、CSS 根本不用谈使用了，因为你连发布文章都会非常吃力，所以想玩好静态博客，不经历点摸爬滚打，是不可能的。不要跟我说简单，因为你的简单只建立在原生无改动的情况下。</li>
+										<li>生成速度（编译速度），不同的静态博客生成器的速度各不相同，一旦静态资源存在大量图片，速度就会有明显的变化，当然对于坚定静态博客的人，这点忽略不计。</li>
+										
+									</ol>
+								</p>
+							</div>
+							
+						</div>
+						
+					</div>
+					<!--取消浮动并且占据一个位置-->
+					<div style="clear: both;" border:true></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

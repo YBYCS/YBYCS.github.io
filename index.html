@@ -6,9 +6,51 @@
 	<title>ybycs的博客</title>
 	<link rel="stylesheet" type="text/css" href="css/baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+	</script>
+
+	<script>
+		$(document).ready(function () {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest(); //其他浏览器
+			} else if (window.ActiveXObject) {
+				try {
+					xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); //旧版IE
+				} catch (e) {}
+				try {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //新版IE
+				} catch (e) {}
+				if (!xmlhttp) {
+					window.alert("不能创建XMLHttpRequest对象");
+				}
+			}
+			var pare = document.getElementById("page-right");
+			
+			for (var i = 1; i <= 10; i++) {
+				var flag = false;
+				$("<div>")
+					.attr("id", "card" + i.toString())
+					.appendTo(pare)
+					.load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
+						if (status != "success") {
+							$(this).remove();
+						}
+					});
+			}
+		});
+	</script>
+
+
+
 </head>
 
+
+
 <body lang="zh">
+
+
+
 	<div id="page-container">
 		<div id="page-header">
 			<div id="header-container">
@@ -27,28 +69,30 @@
 				<a href="/massage" rel="noopener">
 					<span>留言</span>
 				</a>
-				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;" title="Download on GitHub">
+				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;"
+					title="Download on GitHub">
 					<i class="fab fa-github "></i>
 				</a>
-				
-				<a  href="/" style="float:right;" rel="noopener" >
+
+				<a href="/" style="float:right;" rel="noopener">
 					<i class="fas fa-search"></i>
 				</a>
 			</div>
 		</div>
 		<div id="page-body">
-			<div id="content-container" >
+			<div id="content-container">
 				<div class="toolbar"></div>
-				<div id="page-content" >
+				<div id="page-content">
 					<!-- 左界面 -->
 					<div id="page-left-container">
 						<div id="showmyself">
-							<figure>
-								<img src="img/Himeno Sena.jpg" width="75%"/>
-								<h1>YBYCS</h1>
-								<h3>苟利星奏生死以,岂因新岛避趋之</h3>
-							</figure>
-							<a style="color: black;" target="_blank" rel="noopener" title="Email" href="mailto:1738146845@qq.com">
+
+							<img src="/img/Himeno Sena.jpg" width="75%" />
+							<h1 style="margin: 1px;">YBYCS</h1>
+							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
+
+							<a style="color: black;" target="_blank" rel="noopener" title="Email"
+								href="mailto:1738146845@qq.com">
 								<i class="fas fa-envelope"></i>
 							</a>
 						</div>
@@ -56,8 +100,7 @@
 					<!-- 右界面 -->
 					<div id="page-right-container">
 						<div id="page-right">
-							
-							
+
 						</div>
 					</div>
 					<!--取消浮动并且占据一个位置-->
