@@ -40,6 +40,22 @@ body{
 	transform: background-color 0.1s;
 	
 }
+#page-header i:hover{
+	background-color: aquamarine;
+	transform: background-color 0.1s;
+	
+}
+#search{
+	FONT-VARIANT: JIS83;display: flex;
+	align-items: center;
+	justify-content: center;
+	float: right;
+	height: calc(100% - 3px);
+	padding: 0 8px;
+	padding-top: 1.4px;
+	margin: 0 2px 3px 2px;
+}
+
 #page-body{
 	padding-top: 60px;
 	display: block;

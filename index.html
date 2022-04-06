@@ -11,20 +11,7 @@
 
 	<script>
 		$(document).ready(function () {
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-				xmlhttp = new XMLHttpRequest(); //其他浏览器
-			} else if (window.ActiveXObject) {
-				try {
-					xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); //旧版IE
-				} catch (e) {}
-				try {
-					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //新版IE
-				} catch (e) {}
-				if (!xmlhttp) {
-					window.alert("不能创建XMLHttpRequest对象");
-				}
-			}
+			
 			var pare = document.getElementById("page-right");
 			
 			for (var i = 1; i <= 10; i++) {
@@ -33,16 +20,13 @@
 					.attr("id", "card" + i.toString())
 					.appendTo(pare)
 					.load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
-						if (status != "success") {
+						if (status!="success"){
 							$(this).remove();
 						}
 					});
 			}
 		});
 	</script>
-
-
-
 </head>
 
 
@@ -73,10 +57,15 @@
 					title="Download on GitHub">
 					<i class="fab fa-github "></i>
 				</a>
-
-				<a href="/" style="float:right;" rel="noopener">
-					<i class="fas fa-search"></i>
-				</a>
+				<div id="search">
+					<form >
+						<input type="text" name="search">
+						
+						<i class="fas fa-search" style="color: white;"></i>
+					</form>
+					
+				</div>
+				
 			</div>
 		</div>
 		<div id="page-body">
