@@ -99,6 +99,15 @@ body{
 	
 	padding:0px 5px;
 }
+
+.quote{
+	text-decoration: none;
+	color: #a4a4a4;
+}
+.article-lead{
+	
+	cursor: pointer;
+}
 .article-container{
 	border: 3px solid #ffffff;
 	border-radius: 5px;
@@ -106,9 +115,7 @@ body{
 	
 	padding:0px 5px;
 }
-.article-lead{
-	margin: 10px;
-}
+
 .article-more{
 	margin: 10px;
 }

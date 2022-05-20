@@ -6,7 +6,7 @@
 	<title>ybycs的博客</title>
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 	</script>
-	<link rel="stylesheet" type="text/css" href="/css/baselayout.css">
+	<link rel="stylesheet" type="text/css" href="/baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 	<script>
 		$(".article-url").removeAttr("href");
@@ -17,28 +17,33 @@
 	<div id="page-container">
 		<div id="page-header">
 			<div id="header-container">
-				<a href="/" rel="noopener">
+				<a href="/index.html" rel="noopener">
 					<span>首页</span>
 				</a>
-				<a href="/summary" rel="noopener">
+				<a href="/summary.html" rel="noopener">
 					<span>汇总</span>
 				</a>
-				<a href="/friendlink" rel="noopener">
+				<a href="/friendlink.html" rel="noopener">
 					<span>友链</span>
 				</a>
-				<a href="/about" rel="noopener">
+				<a href="/about.html" rel="noopener">
 					<span>关于</span>
 				</a>
-				<a href="/massage" rel="noopener">
+				<a href="/massage.html" rel="noopener">
 					<span>留言</span>
 				</a>
 				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;" title="Download on GitHub">
 					<i class="fab fa-github "></i>
 				</a>
 				
-				<a  href="/" style="float:right;" rel="noopener" >
-					<i class="fas fa-search"></i>
-				</a>
+				<div id="search">
+					<form>
+						<input type="text" name="search">
+
+						<i class="fas fa-search" style="color: white;"></i>
+					</form>
+
+				</div>
 			</div>
 		</div>
 		<div id="page-body">
@@ -61,12 +66,13 @@
 					<!-- 右界面 -->
 					<div id="page-right-container">
 						<div class="article-container">
-							<div id="article-lead">
+							<div class="article-lead">
 								<h1 class="article-title">
-									<a class="article-url" href="/article/1.html">静态博客介绍</a>
+									静态博客介绍
 								</h1>
 								<h2>静态博客是什么</h2>
-								<p>所谓静态博客，即通过生成工具（eg：Hexo；Hugo等），直接将作者所书写的博文编译成最终的 html；css；js 等静态文件。作者/博主，只需将生成的文件部署在静态 server 上面即可被在互联网中访问。 用户通过浏览器访问服务器，直接就回获得已编译的静态资源。</p>
+								<p>静态博客不需要后端支持,仅仅是利用生成工具（eg：Hexo；Hugo等）,直接将作者所书写的博文编译成最终的html,css,js等文件。作者/博主，只需将生成的文件部署在静态 server 上面即可被在互联网中访问。
+									用户通过浏览器访问服务器，直接就回获得已编译的静态资源。</p>
 							</div>
 							<div id="article-more">
 								<h2>静态百科的优缺点</h2>
@@ -76,7 +82,7 @@
 									<ol>
 										<li>速度极快，因为当用户访问博客时，只用从服务器（如nginx）调取编译好的静态资源即可，无需实时从数据库查询获取博文、图片、评论、访问量等资源，效率极高，打开网站的速度会非常快速 ！</li>
 										<li>作者可以专心生产博文，不用管服务器维护等琐事，基本不需要维护，折腾党除外。</li>
-										<li>成本低，市面上有很多开源免费的托管程序（如 gayhub；gitee；coding 等），不用担心高昂的服务器费用。</li>										</li>
+										<li>成本低，市面上有很多开源免费的托管程序（如 github；gitee；coding 等），不用担心高昂的服务器费用。</li>										</li>
 										
 									</ol>
 									<h3>缺点</h3>
@@ -88,6 +94,11 @@
 										
 									</ol>
 								</p>
+								<a class="quote" target="_blank" href="https://blog.csdn.net/MarkeyMark/article/details/108179312">如何在github上部署个人博客</a>
+								<br/>
+								<a class="quote" target="_blank" href="https://hexo.io/zh-cn/index.html">Hexo官网</a>
+								
+
 							</div>
 							
 						</div>
