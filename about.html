@@ -9,7 +9,10 @@
 	<link rel="stylesheet" type="text/css" href="/baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 	<script>
-		$(".article-url").removeAttr("href");
+		function search(){
+		var value = document.getElementById("searchText");
+		window.open("https://www.bing.com/search?q="+value.value);
+		}
 	</script>
 </head>
 
@@ -38,9 +41,9 @@
 				
 				<div id="search">
 					<form>
-						<input type="text" name="search">
+						<input id="searchText" type="text" name="search">
 
-						<i class="fas fa-search" style="color: white;"></i>
+						<i onclick="search()" class="fas fa-search" style="color: white;"></i>
 					</form>
 
 				</div>

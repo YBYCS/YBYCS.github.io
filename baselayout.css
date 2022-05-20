@@ -106,6 +106,9 @@ body{
 }
 .article-lead{
 	
+	
+}
+.canClick{
 	cursor: pointer;
 }
 .article-container{
@@ -154,3 +157,6 @@ body{
 	border-end-end-radius: 8px;
 }
 
+.ulRemoveDot{
+	list-style-type: none;
+}

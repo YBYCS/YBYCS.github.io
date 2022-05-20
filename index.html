@@ -9,25 +9,30 @@
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 	</script>
-
 	<script>
+		function search(){
+			var value = document.getElementById("searchText");
+			window.open("https://www.bing.com/search?q="+value.value);
+		}
 		// $(document).ready(function () {
 
-		// 	var pare = document.getElementById("page-right");
+		// var pare = document.getElementById("page-right");
 
-		// 	for (var i = 1; i <= 10; i++) {
-		// 		var flag = false;
-		// 		$("<div>")
-		// 			.attr("id", "card" + i.toString())
-		// 			.appendTo(pare)
-		// 			.load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
-		// 				if (status!="success"){
-		// 					$(this).remove();
-		// 				}
-		// 			});
-		// 	}
-		// });
+		// for (var i = 1; i <= 10; i++) { // var flag=false; // $("<div>")
+			// .attr("id", "card" + i.toString())
+			// .appendTo(pare)
+			// .load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
+			// if (status!="success"){
+			// $(this).remove();
+			// }
+			// });
+			// }
+			// });
 	</script>
+		
+	
+		
+	
 </head>
 
 
@@ -41,9 +46,6 @@
 			<div id="header-container">
 				<a href="/index.html" rel="noopener">
 					<span>首页</span>
-				</a>
-				<a href="/summary.html" rel="noopener">
-					<span>汇总</span>
 				</a>
 				<a href="/friendlink.html" rel="noopener">
 					<span>友链</span>
@@ -60,9 +62,9 @@
 				</a>
 				<div id="search">
 					<form>
-						<input type="text" name="search">
+						<input id="searchText" type="text" name="search">
 
-						<i class="fas fa-search" style="color: white;"></i>
+						<i onclick="search()" class="fas fa-search" style="color: white;"></i>
 					</form>
 
 				</div>
@@ -90,7 +92,7 @@
 					<!-- 右界面 -->
 					<div id="page-right-container">
 						<div id="page-right">
-							<div class="article-lead" onclick="window.open('/article/1.html', '_blank');">
+							<div class="article-lead canClick" onclick="window.open('/article/1.html', '_blank');">
 								<h1 class="article-title">
 									静态博客介绍
 								</h1>
@@ -98,11 +100,11 @@
 								<p>静态博客不需要后端支持,仅仅是利用生成工具（eg：Hexo；Hugo等）,直接将作者所书写的博文编译成最终的html,css,js等文件......</p>
 								
 							</div>
-							<div class="article-lead" onclick="window.open('/article/2.html', '_blank');">
+							<div class="article-lead canClick" onclick="window.open('/article/2.html', '_blank');">
 								<h1 class="article-title">简单课程表项目介绍</h1>
 								<p>简单课程表是一款基于java开发的安卓端课程表项目,基本以仿照小爱课程表为主......</p>
 							</div>
-							<div class="article-lead" onclick="window.open('/article/3.html', '_blank');">
+							<div class="article-lead canClick" onclick="window.open('/article/3.html', '_blank');">
 								<h1 class="article-title" >Notion介绍</h1>
 								<h2>notion是什么</h2>
 								<p>notion是以block为核心设计理念的一款多端笔记软件,被誉为程序员最后一款笔记软件......</p>
