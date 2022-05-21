@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8" />
+    <title>网页樱花特效源码解析</title>
+    <meta name="description" content="网页樱花特效源码解析">
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="/baselayout.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/codeLayout.css">
+    <script>
+        $(".article-url").removeAttr("href");
+    </script>
+    <script>
+        $(document).ready(function () {
+            var i = -1;
+            addTips = function (e) {
+                var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+                    "友善");
+                var s = $("<span/>").text(a[i]);
+                i = (i + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+
+
+                s.css({
+                    "z-index": 9999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "#ff6651"
+                });
+                $("body").append(s);
+
+                s.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 1000, function () {
+                    s.remove();
+                });
+            }
+            $("body").click(addTips);
+            $("body").bind("contextmenu", addTips);
+        });
+
+        function search() {
+            var value = document.getElementById("searchText");
+            window.open("https://www.bing.com/search?q=" + value.value);
+        }
+
+    </script>
+<script src="/js/sakura.js"></script>
+</head>
+
+<body lang="zh">
+    <div id="page-container">
+        <div id="page-header">
+            <div id="header-container">
+                <a href="/index.html" rel="noopener">
+                    <span>首页</span>
+                </a>
+                <a href="/friendlink.html" rel="noopener">
+                    <span>友链</span>
+                </a>
+                <a href="/about.html" rel="noopener">
+                    <span>关于</span>
+                </a>
+                <a href="/massage.html" rel="noopener">
+                    <span>留言</span>
+                </a>
+                <a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;"
+                    title="Download on GitHub">
+                    <i class="fab fa-github "></i>
+                </a>
+
+                <div id="search">
+                    <form>
+                        <input id="searchText" type="text" name="search">
+
+                        <i onclick="search()" class="fas fa-search" style="color: white;"></i>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div id="page-body">
+            <div id="content-container">
+                <div class="toolbar"></div>
+                <div id="page-content">
+                    <!-- 左界面 -->
+                    <div id="page-left-container">
+                        <div id="showmyself">
+
+                            <img src="/img/Himeno Sena.jpg" width="75%" />
+                            <h1 style="margin: 1px;">YBYCS</h1>
+                            <h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
+
+                            <a style="color: black;" target="_blank" rel="noopener" title="Email"
+                                href="mailto:1738146845@qq.com">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 右界面 -->
+                    <div id="page-right-container">
+                        <div class="article-container">
+                            <div class="article-lead">
+                                <h1 class="article-title">
+                                    网页樱花特效源码解析
+                                </h1>
+                                
+                            </div>
+                            <div id="article-more notion-light-theme">
+                                <div style="background-color:rgba(176, 175, 175, 0.43)">
+                                    <pre><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">樱花 sakura</span>
+
+<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">图片</span>
+<span style="color: rgba(0, 0, 255, 1)">var</span> img = <span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> Image();
+img.src </span>= "<a class="quote" href="/img/sakura.png">/img/sakura.png</a>"<span style="color: rgba(0, 0, 0, 1)">;
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 页面上樱花的数量 </span>
+<span style="color: rgba(0, 0, 255, 1)">var</span> sakuraNum = 21<span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 樱花可以超出界面多少次(为0时不再有樱花) -1为无限制(就是一直重复樱花飘落)</span>
+<span style="color: rgba(0, 0, 255, 1)">var</span> limitTimes = -1<span style="color: rgba(0, 0, 0, 1)">;
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 定义限制数组 用来批量管理每一朵樱花是否还能重新飘落</span>
+<span style="color: rgba(0, 0, 255, 1)">var</span> limitArray = <span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> Array(sakuraNum);
+</span><span style="color: rgba(0, 0, 255, 1)">for</span>(<span style="color: rgba(0, 0, 255, 1)">var</span> index = 0;index &lt; sakuraNum;index++<span style="color: rgba(0, 0, 0, 1)">){
+    limitArray[index] </span>=<span style="color: rgba(0, 0, 0, 1)"> limitTimes;
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 定义樱花对象, idx 超过多少次</span>
+<span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)"> Sakura(x, y, s, r, fn, idx) {
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.x =<span style="color: rgba(0, 0, 0, 1)"> x;
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y =<span style="color: rgba(0, 0, 0, 1)"> y;
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.s = s;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">显示大小(倍率)</span>
+    <span style="color: rgba(0, 0, 255, 1)">this</span>.r = r;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">旋转</span>
+    <span style="color: rgba(0, 0, 255, 1)">this</span>.fn = fn;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">用来计算速度的函数</span>
+    <span style="color: rgba(0, 0, 255, 1)">this</span>.idx =<span style="color: rgba(0, 0, 0, 1)"> idx;
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 绘制樱花</span>
+Sakura.prototype.draw = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(cxt) {
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">这里比较难以理解 save()是储存canvas的状态 这里储存的是一开始的默认状态 </span>
+<span style="color: rgba(0, 0, 0, 1)">    cxt.save();
+    cxt.translate(</span><span style="color: rgba(0, 0, 255, 1)">this</span>.x, <span style="color: rgba(0, 0, 255, 1)">this</span>.y);<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">移动画布左上角</span>
+    cxt.rotate(<span style="color: rgba(0, 0, 255, 1)">this</span>.r);<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">旋转绘图</span>
+    cxt.drawImage(img, 0, 0, 40 * <span style="color: rgba(0, 0, 255, 1)">this</span>.s, 40 * <span style="color: rgba(0, 0, 255, 1)">this</span>.s);<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">绘画</span>
+    <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">经过上面的 translate rotate画布会改变状态(最上角平移了 本身旋转了) 所以要用restore恢复成save储存的状态 
+        也就是默认状态</span>
+    <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">相当于 我画樱花在同一个地方 但是画布挪动了 也就是笔的位置不懂 我调整画布来画画</span>
+<span style="color: rgba(0, 0, 0, 1)">    cxt.restore();
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 修改樱花位置,模拟飘落.</span>
+Sakura.prototype.update = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">更新下一帧的状态(位置,,旋转)</span>
+    <span style="color: rgba(0, 0, 255, 1)">this</span>.x = <span style="color: rgba(0, 0, 255, 1)">this</span>.fn.x(<span style="color: rgba(0, 0, 255, 1)">this</span>.x, <span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.y);
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y = <span style="color: rgba(0, 0, 255, 1)">this</span>.fn.y(<span style="color: rgba(0, 0, 255, 1)">this</span>.y, <span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.y);
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = <span style="color: rgba(0, 0, 255, 1)">this</span>.fn.r(<span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.r);
+
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 如果樱花越界, 重新调整位置回到屏幕来</span>
+    <span style="color: rgba(0, 0, 255, 1)">if</span>(<span style="color: rgba(0, 0, 255, 1)">this</span>.x &gt; window.innerWidth || <span style="color: rgba(0, 0, 255, 1)">this</span>.x &lt; 0 ||
+        <span style="color: rgba(0, 0, 255, 1)">this</span>.y &gt; window.innerHeight || <span style="color: rgba(0, 0, 255, 1)">this</span>.y &lt; 0<span style="color: rgba(0, 0, 0, 1)">) {
+
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 如果樱花不做限制 就不断的回到屏幕</span>
+        <span style="color: rgba(0, 0, 255, 1)">if</span> (limitArray[<span style="color: rgba(0, 0, 255, 1)">this</span>.idx] == -1<span style="color: rgba(0, 0, 0, 1)">) {
+            </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">获取随机值来初始化 getRandom是用来初始化的一个函数</span>
+            <span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('fnr'<span style="color: rgba(0, 0, 0, 1)">);
+            </span><span style="color: rgba(0, 0, 255, 1)">if</span>(Math.random() &gt; 0.4<span style="color: rgba(0, 0, 0, 1)">) {
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.x = getRandom('x'<span style="color: rgba(0, 0, 0, 1)">);
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y = 0<span style="color: rgba(0, 0, 0, 1)">;
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.s = getRandom('s'<span style="color: rgba(0, 0, 0, 1)">);
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('r'<span style="color: rgba(0, 0, 0, 1)">);
+            } </span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)"> {
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.x =<span style="color: rgba(0, 0, 0, 1)"> window.innerWidth;
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y = getRandom('y'<span style="color: rgba(0, 0, 0, 1)">);
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.s = getRandom('s'<span style="color: rgba(0, 0, 0, 1)">);
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('r'<span style="color: rgba(0, 0, 0, 1)">);
+            }
+        }
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 樱花有限制 着记次数</span>
+        <span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)"> {
+            </span><span style="color: rgba(0, 0, 255, 1)">if</span> (limitArray[<span style="color: rgba(0, 0, 255, 1)">this</span>.idx] &gt; 0<span style="color: rgba(0, 0, 0, 1)">) {
+                </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('fnr'<span style="color: rgba(0, 0, 0, 1)">);
+                </span><span style="color: rgba(0, 0, 255, 1)">if</span>(Math.random() &gt; 0.4<span style="color: rgba(0, 0, 0, 1)">) {
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.x = getRandom('x'<span style="color: rgba(0, 0, 0, 1)">);
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y = 0<span style="color: rgba(0, 0, 0, 1)">;
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.s = getRandom('s'<span style="color: rgba(0, 0, 0, 1)">);
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('r'<span style="color: rgba(0, 0, 0, 1)">);
+                } </span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)"> {
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.x =<span style="color: rgba(0, 0, 0, 1)"> window.innerWidth;
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.y = getRandom('y'<span style="color: rgba(0, 0, 0, 1)">);
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.s = getRandom('s'<span style="color: rgba(0, 0, 0, 1)">);
+                    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.r = getRandom('r'<span style="color: rgba(0, 0, 0, 1)">);
+                }
+                </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 该越界的樱花限制数减一</span>
+                limitArray[<span style="color: rgba(0, 0, 255, 1)">this</span>.idx]--<span style="color: rgba(0, 0, 0, 1)">;
+            }
+        }
+    }
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">樱花列表</span>
+SakuraList = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span>.list =<span style="color: rgba(0, 0, 0, 1)"> [];
+}
+SakuraList.prototype.push </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(sakura) {
+    </span><span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.list.push(sakura);
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> list update 方法 用来遍历更新樱花的下一帧状态</span>
+SakuraList.prototype.update = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    </span><span style="color: rgba(0, 0, 255, 1)">for</span>(<span style="color: rgba(0, 0, 255, 1)">var</span> i = 0, len = <span style="color: rgba(0, 0, 255, 1)">this</span>.list.length; i &lt; len; i++<span style="color: rgba(0, 0, 0, 1)">) {
+        </span><span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.list[i].update();
+    }
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> list draw 方法</span>
+SakuraList.prototype.draw = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(cxt) {
+    </span><span style="color: rgba(0, 0, 255, 1)">for</span>(<span style="color: rgba(0, 0, 255, 1)">var</span> i = 0, len = <span style="color: rgba(0, 0, 255, 1)">this</span>.list.length; i &lt; len; i++<span style="color: rgba(0, 0, 0, 1)">) {
+        </span><span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.list[i].draw(cxt);
+    }
+}
+SakuraList.prototype.get </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(i) {
+    </span><span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.list[i];
+}
+SakuraList.prototype.size </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    </span><span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)">.list.length;
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 位置随机策略 根据传入的值不同 返回不同结果</span>
+<span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)"> getRandom(option) {
+    </span><span style="color: rgba(0, 0, 255, 1)">var</span><span style="color: rgba(0, 0, 0, 1)"> ret, random;
+    </span><span style="color: rgba(0, 0, 255, 1)">switch</span><span style="color: rgba(0, 0, 0, 1)">(option) {
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 'x'<span style="color: rgba(0, 0, 0, 1)">:
+            ret </span>= Math.random() *<span style="color: rgba(0, 0, 0, 1)"> window.innerWidth;
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 'y'<span style="color: rgba(0, 0, 0, 1)">:
+            ret </span>= Math.random() *<span style="color: rgba(0, 0, 0, 1)"> window.innerHeight;
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 's'<span style="color: rgba(0, 0, 0, 1)">:
+            ret </span>=<span style="color: rgba(0, 0, 0, 1)"> Math.random();
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 'r'<span style="color: rgba(0, 0, 0, 1)">:
+            ret </span>= Math.random() * 6<span style="color: rgba(0, 0, 0, 1)">;
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+            </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">fnx fny是控制两个方向的速度的 这里是返回生成对应随机数的函数</span>
+        <span style="color: rgba(0, 0, 255, 1)">case</span> 'fnx'<span style="color: rgba(0, 0, 0, 1)">:
+            random </span>= -0.5 + Math.random() * 1<span style="color: rgba(0, 0, 0, 1)">;
+            ret </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(x, y) {
+                </span><span style="color: rgba(0, 0, 255, 1)">return</span> x + 0.5 * random - 1<span style="color: rgba(0, 0, 0, 1)">;
+            };
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 'fny'<span style="color: rgba(0, 0, 0, 1)">:
+            random </span>= 1.5 + Math.random() * 0.7<span style="color: rgba(0, 0, 0, 1)">
+            ret </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(x, y) {
+                </span><span style="color: rgba(0, 0, 255, 1)">return</span> y +<span style="color: rgba(0, 0, 0, 1)"> random;
+            };
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">case</span> 'fnr'<span style="color: rgba(0, 0, 0, 1)">:
+            random </span>= Math.random() * 0.03<span style="color: rgba(0, 0, 0, 1)">;
+            ret </span>= <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">(r) {
+                </span><span style="color: rgba(0, 0, 255, 1)">return</span> r +<span style="color: rgba(0, 0, 0, 1)"> random;
+            };
+            </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+    }
+    </span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> ret;
+}
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 加载入口</span>
+<span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)"> startSakura() {
+
+  
+    requestAnimationFrame </span>= window.requestAnimationFrame ||<span style="color: rgba(0, 0, 0, 1)">
+        window.mozRequestAnimationFrame </span>||<span style="color: rgba(0, 0, 0, 1)">
+        window.webkitRequestAnimationFrame </span>||<span style="color: rgba(0, 0, 0, 1)">
+        window.msRequestAnimationFrame </span>||<span style="color: rgba(0, 0, 0, 1)">
+        window.oRequestAnimationFrame;
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">画布 用来绘制</span>
+    <span style="color: rgba(0, 0, 255, 1)">var</span> canvas = document.createElement('canvas'<span style="color: rgba(0, 0, 0, 1)">),
+        cxt;
+
+    canvas.height </span>=<span style="color: rgba(0, 0, 0, 1)"> window.innerHeight;
+    canvas.width </span>=<span style="color: rgba(0, 0, 0, 1)"> window.innerWidth;
+    canvas.setAttribute(</span>'style', 'position: fixed;left: 0;top: 0;pointer-events: none;'<span style="color: rgba(0, 0, 0, 1)">);
+    canvas.setAttribute(</span>'id', 'canvas_sakura'<span style="color: rgba(0, 0, 0, 1)">);
+    document.getElementsByTagName(</span>'body')[0<span style="color: rgba(0, 0, 0, 1)">].appendChild(canvas);
+    cxt </span>= canvas.getContext('2d'<span style="color: rgba(0, 0, 0, 1)">);
+    </span><span style="color: rgba(0, 0, 255, 1)">var</span> sakuraList = <span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> SakuraList();
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> sakuraNum 樱花个数 </span>
+    <span style="color: rgba(0, 0, 255, 1)">for</span>(<span style="color: rgba(0, 0, 255, 1)">var</span> i = 0; i &lt; sakuraNum; i++<span style="color: rgba(0, 0, 0, 1)">) {
+        </span><span style="color: rgba(0, 0, 255, 1)">var</span><span style="color: rgba(0, 0, 0, 1)"> sakura, randomX, randomY, randomS, randomR, randomFnx, randomFny;
+        randomX </span>= getRandom('x'<span style="color: rgba(0, 0, 0, 1)">);
+        randomY </span>= getRandom('y'<span style="color: rgba(0, 0, 0, 1)">);
+        randomR </span>= getRandom('r'<span style="color: rgba(0, 0, 0, 1)">);
+        randomS </span>= getRandom('s'<span style="color: rgba(0, 0, 0, 1)">);
+        randomFnx </span>= getRandom('fnx'<span style="color: rgba(0, 0, 0, 1)">);
+        randomFny </span>= getRandom('fny'<span style="color: rgba(0, 0, 0, 1)">);
+        randomFnR </span>= getRandom('fnr'<span style="color: rgba(0, 0, 0, 1)">);
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">fn枚举型 主要是用来向getRandom函数传参</span>
+        sakura = <span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> Sakura(randomX, randomY, randomS, randomR, {
+            x: randomFnx,
+            y: randomFny,
+            r: randomFnR
+        }, i);
+        sakura.draw(cxt);
+        sakuraList.push(sakura);
+    }
+
+    stop </span>= requestAnimationFrame(<span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">擦除画布重新画下一帧</span>
+        cxt.clearRect(0, 0<span style="color: rgba(0, 0, 0, 1)">, canvas.width, canvas.height);
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 修改樱花位置逻辑</span>
+<span style="color: rgba(0, 0, 0, 1)">        sakuraList.update();
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 画出修改后的樱花</span>
+<span style="color: rgba(0, 0, 0, 1)">        sakuraList.draw(cxt);
+        </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 递归 修改位置, 画出修改后的樱花</span>
+        stop =<span style="color: rgba(0, 0, 0, 1)"> requestAnimationFrame(arguments.callee);
+    })
+}
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 用来反正改变大小时产生空指针</span>
+window.onresize = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    </span><span style="color: rgba(0, 0, 255, 1)">var</span> canvasSnow = document.getElementById('canvas_snow'<span style="color: rgba(0, 0, 0, 1)">);
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> canvasSnow 在改变浏览器大小的时候会为null (修改空指针异常), 不过在改变大小时体验稍差</span>
+    <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (canvasSnow) {
+        canvasSnow.width </span>=<span style="color: rgba(0, 0, 0, 1)"> window.innerWidth;
+        canvasSnow.height </span>=<span style="color: rgba(0, 0, 0, 1)"> window.innerHeight;
+    }
+}
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">当页面载入执行</span>
+img.onload = <span style="color: rgba(0, 0, 255, 1)">function</span><span style="color: rgba(0, 0, 0, 1)">() {
+    startSakura();
+}</span></pre>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--取消浮动并且占据一个位置-->
+                    <div style="clear: both;" border:true></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

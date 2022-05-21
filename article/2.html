@@ -4,6 +4,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>ybycs的博客</title>
+	<meta name="description" content="简单课程表开源项目介绍">
+
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 	</script>
 	<link rel="stylesheet" type="text/css" href="/baselayout.css">
@@ -11,6 +13,47 @@
 	<script>
 		$(".article-url").removeAttr("href");
 	</script>
+	<script src="/js/sakura.js"></script>
+	<script>
+		$(document).ready(function () {
+			var i = -1;
+			addTips = function (e) {
+				var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+					"友善");
+				var s = $("<span/>").text(a[i]);
+				i = (i + 1) % a.length;
+				var x = e.pageX,
+					y = e.pageY;
+
+
+				s.css({
+					"z-index": 9999999999999,
+					"top": y - 20,
+					"left": x,
+					"position": "absolute",
+					"font-weight": "bold",
+					"color": "#ff6651"
+				});
+				$("body").append(s);
+
+				s.animate({
+					"top": y - 180,
+					"opacity": 0
+				}, 1000, function () {
+					s.remove();
+				});
+			}
+			$("body").click(addTips);
+			$("body").bind("contextmenu", addTips);
+		});
+
+		function search() {
+			var value = document.getElementById("searchText");
+			window.open("https://www.bing.com/search?q=" + value.value);
+		}
+
+	</script>
+
 </head>
 
 <body lang="zh">
@@ -19,9 +62,6 @@
 			<div id="header-container">
 				<a href="/index.html" rel="noopener">
 					<span>首页</span>
-				</a>
-				<a href="/summary.html" rel="noopener">
-					<span>汇总</span>
 				</a>
 				<a href="/friendlink.html" rel="noopener">
 					<span>友链</span>
@@ -53,7 +93,7 @@
 					<!-- 左界面 -->
 					<div id="page-left-container">
 						<div id="showmyself">
-							
+							<div></div>
 							<img src="/img/Himeno Sena.jpg" width="75%"/>
 							<h1 style="margin: 1px;">YBYCS</h1>
 							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>

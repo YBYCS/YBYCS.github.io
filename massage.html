@@ -11,6 +11,63 @@
 	<script>
 		$(".article-url").removeAttr("href");
 	</script>
+		<script src="/js/sakura.js"></script>
+
+
+		<script>
+			$(document).ready(function () {
+				var i = -1;
+				addTips = function (e) {
+					var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+						"友善");
+					var s = $("<span/>").text(a[i]);
+					i = (i + 1) % a.length;
+					var x = e.pageX,
+						y = e.pageY;
+
+
+					s.css({
+						"z-index": 9999999999999,
+						"top": y - 20,
+						"left": x,
+						"position": "absolute",
+						"font-weight": "bold",
+						"color": "#ff6651"
+					});
+					$("body").append(s);
+
+					s.animate({
+						"top": y - 180,
+						"opacity": 0
+					}, 1000, function () {
+						s.remove();
+					});
+
+					return false;
+				}
+				$("body").click(addTips);
+				$("body").bind("contextmenu", addTips);
+			});
+
+			function search() {
+				var value = document.getElementById("searchText");
+				window.open("https://www.bing.com/search?q=" + value.value);
+			}
+			// $(document).ready(function () {
+
+			// var pare = document.getElementById("page-right");
+
+			// for (var i = 1; i <= 10; i++) { // var flag=false; // $("<div>")
+			// .attr("id", "card" + i.toString())
+			// .appendTo(pare)
+			// .load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
+			// if (status!="success"){
+			// $(this).remove();
+			// }
+			// });
+			// }
+			// });
+		</script>
 </head>
 
 <body lang="zh">

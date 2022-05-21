@@ -1,47 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" style="height: 100%;">
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="baidu-site-verification" content="code-es33ghnznl" />
-	<meta name="google-site-verification" content="MlCQ_O0R_vl71BSeoKma0eE4QaFrcNJJCoIu5wQ9hwM" />
+
+	<meta name="description" content="ybycs的博客">
 	<title>ybycs的博客</title>
 	<link rel="stylesheet" type="text/css" href="baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-	</script>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/js/sakura.js"></script>
+
+
 	<script>
-		function search(){
+		$(document).ready(function () {
+			var i = -1;
+			addTips = function (e) {
+				var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+					"友善");
+				var s = $("<span/>").text(a[i]);
+				i = (i + 1) % a.length;
+				var x = e.pageX,
+					y = e.pageY;
+
+
+				s.css({
+					"z-index": 9999999999999,
+					"top": y - 20,
+					"left": x,
+					"position": "absolute",
+					"font-weight": "bold",
+					"color": "#ff6651"
+				});
+				$("body").append(s);
+
+				s.animate({
+					"top": y - 180,
+					"opacity": 0
+				}, 1000, function () {
+					s.remove();
+				});
+
+			}
+			$("body").click(addTips);
+			$("body").bind("contextmenu", addTips);
+		});
+
+		function search() {
 			var value = document.getElementById("searchText");
-			window.open("https://www.bing.com/search?q="+value.value);
+			window.open("https://www.bing.com/search?q=" + value.value);
 		}
-		// $(document).ready(function () {
-
-		// var pare = document.getElementById("page-right");
-
-		// for (var i = 1; i <= 10; i++) { // var flag=false; // $("<div>")
-			// .attr("id", "card" + i.toString())
-			// .appendTo(pare)
-			// .load("/article/" + i.toString() + ".html #article-lead",function(response,status,xhr){
-			// if (status!="success"){
-			// $(this).remove();
-			// }
-			// });
-			// }
-			// });
 	</script>
-		
-	
-		
-	
+
+
+
+
 </head>
 
 
 
-<body lang="zh">
-
-
-
+<body lang="zh" style=" height:100%;">
+	
 	<div id="page-container">
 		<div id="page-header">
 			<div id="header-container">
@@ -72,6 +91,7 @@
 
 			</div>
 		</div>
+
 		<div id="page-body">
 			<div id="content-container">
 				<div class="toolbar"></div>
@@ -90,6 +110,7 @@
 							</a>
 						</div>
 					</div>
+
 					<!-- 右界面 -->
 					<div id="page-right-container">
 						<div id="page-right">
@@ -99,19 +120,26 @@
 								</h1>
 								<h2>静态博客是什么</h2>
 								<p>静态博客不需要后端支持,仅仅是利用生成工具（eg：Hexo；Hugo等）,直接将作者所书写的博文编译成最终的html,css,js等文件......</p>
-								
+
 							</div>
 							<div class="article-lead canClick" onclick="window.open('/article/2.html', '_blank');">
 								<h1 class="article-title">简单课程表项目介绍</h1>
 								<p>简单课程表是一款基于java开发的安卓端课程表项目,基本以仿照小爱课程表为主......</p>
 							</div>
 							<div class="article-lead canClick" onclick="window.open('/article/3.html', '_blank');">
-								<h1 class="article-title" >Notion介绍</h1>
+								<h1 class="article-title">Notion介绍</h1>
 								<h2>notion是什么</h2>
 								<p>notion是以block为核心设计理念的一款多端笔记软件,被誉为程序员最后一款笔记软件......</p>
 							</div>
+							<div class="article-lead canClick" onclick="window.open('/article/4.html', '_blank');">
+								<h1 class="article-title">网页樱花特效源码解析</h1>
+								<p>呐,你知道樱花下落的速度吗......</p>
+							</div>
+							<!-- 页码旋转 -->
 							<div class="pageSelectContainer">
-								<div class="pageCard"><div>1</div></div>
+								<div class="pageCardContainer">
+									<div class="pageCard canClick selected-page" href="/">1</div>
+								</div>
 							</div>
 						</div>
 					</div>

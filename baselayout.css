@@ -113,16 +113,23 @@ body{
 	height: 50px;
 
 }
-#page-right .pageCard{
+#page-right .pageCardContainer{
 	width: 50px;
 	height: 45px;
 	display: flex;
+	justify-content: center;align-items: center;
+}
+.pageCard{
 	
-	
-	border: 2px solid #a4a4a4;
+}
+
+#page-right .selected-page{
+	background-color: rgb(255, 237, 165);
+}
+#page-right .pageCard{
+	border: 1px solid #a4a4a4;
 	border-radius: 5px;
-	background-color: aqua;
-justify-content: center;align-items: center;}
+}
 .canClick{
 	cursor: pointer;
 }
@@ -171,7 +178,11 @@ justify-content: center;align-items: center;}
 	border-start-end-radius: 8px;
 	border-end-end-radius: 8px;
 }
+.tt{
+	width: 100;
+	background-color: white;
+}
 
-.ulRemoveDot{
+.ulRemoveDot {
 	list-style-type: none;
 }
