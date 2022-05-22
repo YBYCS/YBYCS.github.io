@@ -2,7 +2,7 @@
 
 //图片
 var img = new Image();
-img.src = "/img/sakura.png";
+img.src = "../img/sakura.png";
 
 // 页面上樱花的数量 
 var sakuraNum = 21;

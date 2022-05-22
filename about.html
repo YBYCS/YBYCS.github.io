@@ -6,80 +6,78 @@
 	<title>ybycs的博客</title>
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 	</script>
-	<link rel="stylesheet" type="text/css" href="/baselayout.css">
+	<link rel="stylesheet" type="text/css" href="baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 	<script>
-		function search(){
-		var value = document.getElementById("searchText");
-		window.open("https://www.bing.com/search?q="+value.value);
+		function search() {
+			var value = document.getElementById("searchText");
+			window.open("https://www.bing.com/search?q=" + value.value);
 		}
 	</script>
-		<script src="/js/sakura.js"></script>
+	<script src="js/sakura.js"></script>
 
 
-		<script>
-			$(document).ready(function () {
-				var i = -1;
-				addTips = function (e) {
-					var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
-						"友善");
-					var s = $("<span/>").text(a[i]);
-					i = (i + 1) % a.length;
-					var x = e.pageX,
-						y = e.pageY;
+	<script>
+		$(document).ready(function () {
+			var i = -1;
+			addTips = function (e) {
+				var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+					"友善");
+				var s = $("<span/>").text(a[i]);
+				i = (i + 1) % a.length;
+				var x = e.pageX,
+					y = e.pageY;
 
 
-					s.css({
-						"z-index": 9999999999999,
-						"top": y - 20,
-						"left": x,
-						"position": "absolute",
-						"font-weight": "bold",
-						"color": "#ff6651"
-					});
-					$("body").append(s);
+				s.css({
+					"z-index": 9999999999999,
+					"top": y - 20,
+					"left": x,
+					"position": "absolute",
+					"font-weight": "bold",
+					"color": "#ff6651"
+				});
+				$("body").append(s);
 
-					s.animate({
-						"top": y - 180,
-						"opacity": 0
-					}, 1000, function () {
-						s.remove();
-					});
-
-					return false;
-				}
-				$("body").click(addTips);
-				$("body").bind("contextmenu", addTips);
-			});
-
-			function search() {
-				var value = document.getElementById("searchText");
-				window.open("https://www.bing.com/search?q=" + value.value);
+				s.animate({
+					"top": y - 180,
+					"opacity": 0
+				}, 1000, function () {
+					s.remove();
+				});
 			}
+			$("body").click(addTips);
+			$("body").bind("contextmenu", addTips);
+		});
 
-		</script>
+		function search() {
+			var value = document.getElementById("searchText");
+			window.open("https://www.bing.com/search?q=" + value.value);
+		}
+	</script>
 </head>
 
 <body lang="zh">
 	<div id="page-container">
 		<div id="page-header">
 			<div id="header-container">
-				<a href="/" rel="noopener">
+				<a href="index.html" rel="noopener">
 					<span>首页</span>
 				</a>
-				<a href="/friendlink.html" rel="noopener">
+				<a href="friendlink.html" rel="noopener">
 					<span>友链</span>
 				</a>
-				<a href="/about.html" rel="noopener">
+				<a href="about.html" rel="noopener">
 					<span>关于</span>
 				</a>
-				<a href="/massage.html" rel="noopener">
+				<a href="massage.html" rel="noopener">
 					<span>留言</span>
 				</a>
-				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;" title="Download on GitHub">
+				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;"
+					title="Download on GitHub">
 					<i class="fab fa-github "></i>
 				</a>
-				
+
 				<div id="search">
 					<form>
 						<input id="searchText" type="text" name="search">
@@ -91,18 +89,19 @@
 			</div>
 		</div>
 		<div id="page-body">
-			<div id="content-container" >
+			<div id="content-container">
 				<div class="toolbar"></div>
-				<div id="page-content" >
+				<div id="page-content">
 					<!-- 左界面 -->
 					<div id="page-left-container">
 						<div id="showmyself">
-							
-							<img src="/img/Himeno Sena.jpg" width="75%"/>
+
+							<img src="img/Himeno Sena.jpg" width="75%" />
 							<h1 style="margin: 1px;">YBYCS</h1>
 							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
-							
-							<a style="color: black;" target="_blank" rel="noopener" title="Email" href="mailto:1738146845@qq.com">
+
+							<a style="color: black;" target="_blank" rel="noopener" title="Email"
+								href="mailto:1738146845@qq.com">
 								<i class="fas fa-envelope"></i>
 							</a>
 						</div>
@@ -116,14 +115,15 @@
 								</h1>
 								<h2></h2>
 								<p>20岁,是个大学生,没什么好说放一首歌吧</p>
-								<audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="/res/lhls.mp3"/>
+								<audio autoplay="autoplay" controls="controls" loop="loop" preload="auto"
+									src="res/lhls.mp3" />
 							</div>
 							<div id="article-more">
 
 							</div>
-							
+
 						</div>
-						
+
 					</div>
 					<!--取消浮动并且占据一个位置-->
 					<div style="clear: both;" border:true></div>
