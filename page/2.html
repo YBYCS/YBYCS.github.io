@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh" style="height: 100%;">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="description" content="ybycs的博客">
+    <title>ybycs的博客</title>
+    <link rel="stylesheet" type="text/css" href="/baselayout.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/sakura.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var i = -1;
+            addTips = function (e) {
+                var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
+                    "友善");
+                var s = $("<span/>").text(a[i]);
+                i = (i + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+
+
+                s.css({
+                    "z-index": 9999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "#ff6651"
+                });
+                $("body").append(s);
+
+                s.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 1000, function () {
+                    s.remove();
+                });
+
+            }
+            $("body").click(addTips);
+            $("body").bind("contextmenu", addTips);
+        });
+
+        function search() {
+            var value = document.getElementById("searchText");
+            window.open("https://www.bing.com/search?q=" + value.value);
+        }
+    </script>
+
+
+
+
+</head>
+
+
+
+<body lang="zh" style=" height:100%;">
+
+    <div id="page-container">
+        <div id="page-header">
+            <div id="header-container">
+                <a href="index.html" rel="noopener">
+                    <span>首页</span>
+                </a>
+                <a href="friendlink.html" rel="noopener">
+                    <span>友链</span>
+                </a>
+                <a href="about.html" rel="noopener">
+                    <span>关于</span>
+                </a>
+                <a href="massage.html" rel="noopener">
+                    <span>留言</span>
+                </a>
+                <a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;"
+                    title="Download on GitHub">
+                    <i class="fab fa-github "></i>
+                </a>
+                <div id="search">
+                    <form>
+                        <input id="searchText" type="text" name="search">
+
+                        <i onclick="search()" class="fas fa-search" style="color: white;"></i>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="page-body">
+            <div id="content-container">
+                <div class="toolbar"></div>
+                <div id="page-content">
+                    <!-- 左界面 -->
+                    <div id="page-left-container">
+                        <div id="showmyself">
+
+                            <img src="/img/Himeno Sena.jpg" width="75%" />
+                            <h1 style="margin: 1px;">YBYCS</h1>
+                            <h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
+
+                            <a style="color: black;" target="_blank" rel="noopener" title="Email"
+                                href="mailto:1738146845@qq.com">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 右界面 -->
+                    <div id="page-right-container">
+                        <div id="page-right">
+                            <div class="article-lead canClick" onclick="window.open('article/6.html', '_blank');">
+                                <h1 class="article-title">
+                                    浅谈C#GC
+                                </h1>
+                                <h2>什么是GC?</h2>
+                                <p>GC(Grid
+                                    Communication)如其名，就是垃圾收集，当然这里仅就内存而言。而为什么要GC就不多赘述了<br />
+                                    GarbageCollector（垃圾收集器，在不至于混淆的情况下也成为GC）以应用程序的root为基础，遍历应用程序在Heap上动态分配的所有对象，
+                                    通过识别它们是否被引用来确定哪些对象是已经死亡的、哪些仍需要被使用。
+                                    已经不再被应用程序的root或者别的对象所引用的对象就是已经死亡的对象，即所谓的垃圾，需要被回收。这就是GC工作的原理。
+                                    为了实现这个原理，GC有多种算法。比较常见的算法有Reference
+                                    Counting，Mark Sweep，Copy Collection等等。目前主流的虚拟系统.NET
+                                    CLR，JavaVM和Rotor都是采用的Mark
+                                    Sweep算法。</p>
+
+                            </div>
+                            <!-- 页码旋转 -->
+                            <div class="pageSelectContainer">
+                                <div class="pageCardContainer">
+                                    <div class="pageCard canClick selected-page"><a href="./index.html" rel="noopener"
+                                            style="text-decoration:none">1</a></div>
+                                    <div class="pageCard canClick selected-page"><a href="./page/2.html" rel="noopener"
+                                            style="text-decoration:none">2</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--取消浮动并且占据一个位置-->
+                    <div style="clear: both;" border:true></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
