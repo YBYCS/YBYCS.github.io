@@ -3,152 +3,45 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>ybycs的博客</title>
-	<meta name="description" content="简单课程表开源项目介绍">
-
-	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-	</script>
+	<base target="_blank">
 	<link rel="stylesheet" type="text/css" href="../baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-	<script>
-		$(".article-url").removeAttr("href");
-	</script>
-	<script src="../js/sakura.js"></script>
-	<script>
-		$(document).ready(function () {
-			var i = -1;
-			addTips = function (e) {
-				var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
-					"友善");
-				var s = $("<span/>").text(a[i]);
-				i = (i + 1) % a.length;
-				var x = e.pageX,
-					y = e.pageY;
-
-
-				s.css({
-					"z-index": 9999999999999,
-					"top": y - 20,
-					"left": x,
-					"position": "absolute",
-					"font-weight": "bold",
-					"color": "#ff6651"
-				});
-				$("body").append(s);
-
-				s.animate({
-					"top": y - 180,
-					"opacity": 0
-				}, 1000, function () {
-					s.remove();
-				});
-			}
-			$("body").click(addTips);
-			$("body").bind("contextmenu", addTips);
-		});
-
-		function search() {
-			var value = document.getElementById("searchText");
-			window.open("https://www.bing.com/search?q=" + value.value);
-		}
-	</script>
-
 </head>
 
 <body lang="zh">
-	<div id="page-container">
-		<div id="page-header">
-			<div id="header-container">
-				<a href="../index.html" rel="noopener">
-					<span>首页</span>
-				</a>
-				<a href="../friendlink.html" rel="noopener">
-					<span>友链</span>
-				</a>
-				<a href="../about.html" rel="noopener">
-					<span>关于</span>
-				</a>
-				<a href="../massage.html" rel="noopener">
-					<span>留言</span>
-				</a>
-				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;"
-					title="Download on GitHub">
-					<i class="fab fa-github "></i>
-				</a>
-
-				<div id="search">
-					<form>
-						<input id="searchText" type="text" name="search">
-
-						<i onclick="search()" class="fas fa-search" style="color: white;"></i>
-					</form>
-
-				</div>
-			</div>
+	<div class="article-container">
+		<div class="article-lead">
+			<h1 class="article-title">
+				<a class="article-url" href="/article/1.html">简单课程表项目介绍</a>
+			</h1>
+			<p>简单课程表是一款基于java开发的安卓端课程表项目,基本以仿照小爱课程表为主</p>
 		</div>
-		<div id="page-body">
-			<div id="content-container">
-				<div class="toolbar"></div>
-				<div id="page-content">
-					<!-- 左界面 -->
-					<div id="page-left-container">
-						<div id="showmyself">
-							<div></div>
-							<img src="../img/Himeno Sena.jpg" width="75%" />
-							<h1 style="margin: 1px;">YBYCS</h1>
-							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
+		<div class="article-more">
+			<h2>开发原因</h2>
+			<p>主要是因为小爱课程表可能是联网等原因,响应会明显的慢,在分秒必争的踩点中浪费了我过多时间,并且存在一些奇奇怪怪的bug导致无法正常显示,
+				再找别的课程表代替时,发现感觉排版不如小爱同学,于是我就仿照小爱同学开发了简单课程表.
 
-							<a style="color: black;" target="_blank" rel="noopener" title="Email"
-								href="mailto:1738146845@qq.com">
-								<i class="fas fa-envelope"></i>
-							</a>
-						</div>
-					</div>
-					<!-- 右界面 -->
-					<div id="page-right-container">
-						<div class="article-container">
-							<div class="article-lead">
-								<h1 class="article-title">
-									<a class="article-url" href="/article/1.html">简单课程表项目介绍</a>
-								</h1>
-								<p>简单课程表是一款基于java开发的安卓端课程表项目,基本以仿照小爱课程表为主</p>
-							</div>
-							<div class="article-more">
-								<h2>开发原因</h2>
-								<p>主要是因为小爱课程表可能是联网等原因,响应会明显的慢,在分秒必争的踩点中浪费了我过多时间,并且存在一些奇奇怪怪的bug导致无法正常显示,
-									再找别的课程表代替时,发现感觉排版不如小爱同学,于是我就仿照小爱同学开发了简单课程表.
+			</p>
+			<h2>仓库地址</h2>
+			</i><a class="quote" target="_blank" href="https://github.com/YBYCS/SimpleCurriculum"><i
+					class="fab fa-github "></i>Github</a>
+			<h2>效果展示</h2>
+			<img src="../img/kcb1.jpg" alt="" width="49%" style="float: left;margin-right: 1%;margin-bottom: 10px;">
+			<img src="../img/kcb2.jpg" alt="" width="49%" style="float: left;margin-left: 1%;margin-bottom: 10px;">
+			<img src="../img/kcb3.jpg" alt="" width="49%" style="float: left;margin-right: 1%;">
+			<img src="../img/kcb4.jpg" alt="" width="49%" style="float: left;margin-left: 1%;">
 
-								</p>
-								<h2>仓库地址</h2>
-								</i><a class="quote" href="https://github.com/YBYCS/SimpleCurriculum"><i
-										class="fab fa-github "></i>Github</a>
-								<h2>效果展示</h2>
-								<img src="../img/kcb1.jpg" alt="" width="49%"
-									style="float: left;margin-right: 1%;margin-bottom: 10px;">
-								<img src="../img/kcb2.jpg" alt="" width="49%"
-									style="float: left;margin-left: 1%;margin-bottom: 10px;">
-								<img src="../img/kcb3.jpg" alt="" width="49%" style="float: left;margin-right: 1%;">
-								<img src="../img/kcb4.jpg" alt="" width="49%" style="float: left;margin-left: 1%;">
-
-								<div style="clear:both;"></div>
+			<div style="clear:both;"></div>
 
 
-								<h2>代码介绍</h2>
-								<p>查阅顺序,由设置,到课程表,最后是今日课程.代码中的滑动选择器请看类的源文件,代码有较为详尽的注释</p>
+			<h2>代码介绍</h2>
+			<p>查阅顺序,由设置,到课程表,最后是今日课程.代码中的滑动选择器请看类的源文件,代码有较为详尽的注释</p>
 
 
 
 
-							</div>
-
-						</div>
-
-					</div>
-					<!--取消浮动并且占据一个位置-->
-					<div style="clear: both;" border:true></div>
-				</div>
-			</div>
 		</div>
+
 	</div>
 
 </body>

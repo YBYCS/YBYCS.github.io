@@ -1,0 +1,801 @@
+<html>
+
+<head>
+	<base target="_blank">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>如何用Unity简单渲染一个黑洞</title>
+	<style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1e0e4691-17ba-4508-9564-b45c1076a701" class="page sans"><header><h1 class="page-title">如何用Unity简单渲染一个黑洞</h1></header><div class="page-body"><h1 id="dedb4dd1-d33a-4ae3-9eed-07244fd397ad" class="">黑洞的基本构成</h1><figure id="77ef17b7-cdc7-4a18-ac7a-f6c8cf62dfee" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/754456-20211007162445593-1389834329.jpg"><img style="width:512px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/754456-20211007162445593-1389834329.jpg"/></a></figure><p id="fd513048-4e7e-4dda-9e57-062daf18f4a8" class="">黑洞是恒星的一种，它的质量和引力巨大以致于连光都不能从内部逃脱。在黑洞周围，由于强引力的作用会引发时空非常大扭曲。这样，即使是被黑洞挡着的恒星发出的光，虽然有一部分会落入黑洞中消失，可另一部分也会通过弯曲的空间中绕过黑洞往前传播，这就是引力透镜效应。</p><p id="328cfc7e-c908-4d3e-aa5d-e8392342b227" class="">黑洞有4种：</p><ol type="1" id="8b980c34-27ba-45b6-aab4-3bb29b34f8c6" class="numbered-list" start="1"><li>史瓦西黑洞（没有电荷，不旋转）</li></ol><ol type="1" id="0e4c4aba-0145-4ff4-b008-52f929e89af2" class="numbered-list" start="2"><li>R-N黑洞（有电荷，不旋转）</li></ol><ol type="1" id="694d2615-c60f-489d-8750-d5d7b7342ec9" class="numbered-list" start="3"><li>克尔黑洞（没有电荷，旋转）</li></ol><ol type="1" id="1b2ede47-2a0a-48cb-ada7-14cccc65d980" class="numbered-list" start="4"><li>克尔-纽曼黑洞（有电荷，旋转）</li></ol><p id="8af1abb2-d4c5-4385-8e13-278a04f99f01" class="">这里我们只讨论史瓦西黑洞（实际上克尔黑洞更常见）。</p><p id="750b6cd9-9bd1-44b0-8c90-49a7ac30ed65" class="">可以通过<a href="https://www.bilibili.com/video/BV11b411T74K">https://www.bilibili.com/video/BV11b411T74K</a>来了解</p><h2 id="363f182c-a63c-46dc-a1fc-8c36270158f2" class="">事件视界</h2><p id="876c5d43-16db-43b1-a5d6-01fd5c06b66c" class="">平常我们看到的黑洞中的黑的部分就是事件视界（不完全是）</p><figure id="c3736048-592d-4f1b-afd3-68c6a246ae7f" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/bhscattersmall.png"><img style="width:348px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/bhscattersmall.png"/></a></figure><p id="f9d37dda-2a6c-4301-b801-0ce746bbd0b1" class="">上图中黄色的线就是光线，绿色圈内就是事件视界，光是不能从这里逃脱，所以看到的就是黑色。</p><p id="71758d27-2a68-42d4-9e35-3e39f0422825" class="">但是由于引力透镜，实际上看到的时间视界大小是实际上的2.59倍。</p><h2 id="81ff0dec-313b-455f-aa20-c58a697f49f4" class="">引力透镜</h2><p id="8f901cec-4d88-46c7-a7c1-1c455dfb1dc2" class="">还是上面那个图，可以看到靠近黑洞的这个光线都被扭曲了，这使得我们可以看到被黑洞遮挡的物体</p><figure id="e51767aa-8f76-4549-bcda-269a5b4ebe34" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/754456-20211007162458474-369804640.jpg"><img style="width:512px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/754456-20211007162458474-369804640.jpg"/></a></figure><p id="9508b5ed-a5ab-4bc8-b681-5809f7b9a643" class="">
+</p><figure id="242b673d-da51-4a15-9d93-2b02131f93f6" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/th.jpg"><img style="width:336px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/th.jpg"/></a></figure><p id="ba346741-4bff-4b61-b195-c636a6e29bec" class="">爱因斯坦环（恒星外的一圈）就是由于引力透镜效应造成的。</p><p id="5c1ccad4-6105-4225-8542-4caff8652691" class="">视频参考：<a href="https://www.bilibili.com/video/BV1eW411C7Dk">https://www.bilibili.com/video/BV1eW411C7Dk</a></p><h2 id="ad63152b-5bec-4a27-93aa-616883b6be66" class="">吸积盘</h2><p id="ac94f037-7ef4-4fae-8def-95d3f6830860" class="">事件视界之外的气体、星尘在黑洞强大的引力作用下，会朝向黑洞下落。这个过程被称作“黑洞吸积”。由于气体具有一定的角动量，这些气体在下落过程中会形成一个围绕黑洞高速旋转的盘状结构，如同太阳系的各大行星轨道平面一样，这就是<strong>黑洞吸积盘</strong>。</p><figure id="799b7cbe-d090-42b8-8776-79966698631b" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/hm_out_small.jpg"><img style="width:1920px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/hm_out_small.jpg"/></a></figure><p id="91340eb0-3934-49db-8f46-cb401c9d8d31" class="">白白一圈一圈的就是吸积盘了。</p><p id="f48709d6-dbb5-4f54-9ec1-736d9ff43d99" class=""><a href="https://zhuanlan.zhihu.com/p/30445343">Note：黑洞吸积盘简介 - 知乎 (zhihu.com)</a></p><h2 id="4a59fa5d-daa5-4b30-8718-42c983a34d38" class="">喷流</h2><p id="8ecdc597-5e5a-42c9-90a6-e96c7f8b97f0" class="">吸积盘上的气体、星尘有部分会跨越事件视界落入黑洞，从而产生粒子，能量等从黑洞的两极接近光速喷射而出，形成相对论喷流。</p><figure id="b09e590e-006a-4e68-884f-2d7867339a0e" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/eso1907h.jpg"><img style="width:700px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/eso1907h.jpg"/></a></figure><p id="a0801a5d-447f-42e5-8853-ae58df05acf7" class="">那条一束就是喷流。</p><h1 id="82e320d1-9f17-4133-8307-2255d390ae70" class="">具体操作</h1><h2 id="07806bf2-fb5c-41df-bf27-f3699707cd4e" class="">光线步进 Ray Marching</h2><p id="fafb88fe-3291-42e4-94b4-cb07e30fb13b" class="">为了渲染出真实的画面我们就需要使用光线追踪。</p><p id="800279c7-5789-4413-8ae2-1ef95773a256" class="">光线追踪的原理就跟它的名字一样，我们去模拟物理中的光线，光线是怎么走的，我们就跟着它走。具体来讲，一条光线从光源处出发，途中条光线可能会击中某个物体，然后就会发生折射或反射，并且会损失一部分光能。那些最终能射入我们的眼睛（或照相机）的光线，就会在我们的眼睛（或照相机）内留下影像，我们就看到了光来源位置的物体。而我们的渲染器就是去模拟一个这样的过程。</p><p id="5c31838b-25d4-43ff-a92a-a669829341d2" class="">但是!!!如果我们只是这样模拟，会出现一个很大的问题：我们的照相机模型只是一个点，而我们的光线想要击中这样一个点的概率为0！那有没有办法解决这样一个问题呢。答案显然是肯定的。我们在娘胎就学过光路可逆原理，所以如果我们将所有光线反向，是不会影响正确性的，这样就变成了光从照像机发出射向光源，（实际上这就是以前人们认为我们是怎么看世界的）概率比之前大多了。因此，我们的算法变成了：从眼睛中投射出一条射线-&gt;这条击中物体后进行折射或反射-&gt;这条光线击中光源-&gt;获取光源的信息（颜色与亮度）-&gt;回溯以计算亮度的损失-&gt;最终在光屏上着色。</p><figure id="040f85ce-1a8b-4b12-898f-1d411247c613" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/v2-73f07cbeca84613209c26d1ff2583583_720w.webp"><img style="width:587px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/v2-73f07cbeca84613209c26d1ff2583583_720w.webp"/></a></figure><p id="7c90e62d-12be-470a-b625-3ab3789e2930" class="">而光线步进法就是实现光线追踪的一种方法，它从屏幕的像素点出发，每次就走一小步，然后判断是否和物体相撞，如果相撞了我们就看到了这个物体。</p><figure id="b30b3b6e-5f7c-4e08-9ed3-0093ff52b831" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/v2-8459556663c0ea5f455847a2cb36cd3d_720w.webp"><img style="width:720px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/v2-8459556663c0ea5f455847a2cb36cd3d_720w.webp"/></a></figure><p id="9f81930e-7d3a-46bb-aa68-6362ef971fce" class="">具体步骤动画：<a href="https://www.shadertoy.com/view/wlSGWy">Raymarching in Raymarching (shadertoy.com)</a></p><h2 id="82b38072-f0cd-4995-8edc-4d75b8431643" class="">如何判断是否与物体相撞</h2><p id="3771633b-fa05-4542-929a-c64f73f7f2b7" class="">我们可以使用SDF函数，它将返回某点（对于光线步进，我们每次检测的都是某一个位置）是否在某物体上，我们习惯性地设置它的规则是点在图形内部则返回负值，点在图形外部返回正值。比如对于一个在原点上的圆，来说有：</p><pre id="22e4ef1c-1cb0-4822-ba54-b77527be7df5" class="code code-wrap"><code>float sdSphere( vec3 p, float r )
+{
+	return length(p)-r;
+}</code></pre><h2 id="cf828d2f-e7aa-420b-a126-d0905dc4ecc8" class="">如何在Unity中使用光线步进</h2><p id="c44b2cce-1f13-40b9-97d0-e3699d6060d2" class="">因为Unity的渲染中，默认光是直线传播的，所以我们不能直接使用unity来渲染，我们可以获取unity渲染好的画面（也就是原来空白的场景的图片）然后对其进行操作，具体操作如下。</p><pre id="74d0a99b-d610-4375-a869-543b83bb7291" class="code code-wrap"><code>/// &lt;summary&gt;
+    /// 在每一帧渲染完成后自动调用，简单来说就是对渲染图像进行处理
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;source&quot;&gt;unity渲染后的结果，如果不对它处理就是最终展现的画面&lt;/param&gt;
+    /// &lt;param name=&quot;destination&quot;&gt;表示处理后的图像，也就是最终呈现给玩家的图像&lt;/param&gt;
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+				//声明一个和source大小相同的纹理变量
+        var tempTex = RenderTexture.GetTemporary(source.width, source.height);
+        /*
+         * &quot;source&quot;：表示要拷贝的纹理。
+         * &quot;dest&quot;：表示要拷贝到的渲染纹理。
+         * &quot;mat&quot;：表示要使用的材质。
+         * &quot;pass&quot;：表示要使用的材质的渲染通道。
+         */
+        Graphics.Blit(source, tempTex, m_Mat, 0);//对原来的这个纹理进行处理，然后放到临时纹理上去
+        Graphics.Blit(tempTex, destination);
+//释放内存
+        RenderTexture.ReleaseTemporary(tempTex);
+    }</code></pre><p id="13c1e588-521b-4feb-b0ef-4dc6c52eba2b" class="">以上函数可以写在任意一个脚本上，但是需要挂载到摄像机物体上才行。</p><p id="7deb6fc1-3ae7-4d7e-9784-00c6a10cac53" class="">总的来说以上操作就是获取一张和展示框(屏幕）大小相同的画布，然后我们写写画画（具体怎么画的方法就是<mark class="highlight-red">m_Mat</mark>材质规定的）就是一个将我们的处理的图像传递给unity来呈现，和本身场景有什么无关系（被覆盖掉了）。</p><h2 id="73e1269d-e08d-4190-b5e2-6e60e812f829" class="">如何绘制</h2><p id="ce008064-0050-488d-a9a5-800df1fbe879" class="">和正常的自定义shader一样，我们创建一个材质和一个shader，然后为材质选择我们创建的shader，将材质提供给前文的脚本使用（就是m_Mat），可以拖拽赋值或者用m_Mat = Resources.Load&lt;Material&gt;(&quot;BlackHoleMaterial&quot;);</p><h2 id="cefb1769-3f07-4f9a-9a4b-a04b03e9b3fb" class="">实现光线步进</h2><p id="1187014d-1a27-4655-a86e-2c5863f9b948" class="">首先我们要知道这个屏幕上像素点相对于摄像机的方向（因为我们的光就是从摄像机向屏幕像素点上打过去。所以对于每一个像素点我们应该知道的是位置，和其相对于摄像机的方向。</p><pre id="cd6871b9-e2c7-4485-a747-38c2e1626f68" class="code code-wrap"><code>struct appdata
+ {
+	fixed4 vertex : POSITION;
+	fixed2 uv     : TEXCOORD0;//这个就是像素点的位置（0,1）
+};
+struct v2f
+{
+    fixed4 vertex : SV_POSITION;
+    fixed3 rayDir : TEXCOORD0; 
+};
+
+v2f vert (appdata i)
+ {
+	v2f o;
+	o.vertex = UnityObjectToClipPos(i.vertex);
+	fixed3 dir = mul(unity_CameraInvProjection, fixed4(i.uv * 2.0f - 1.0f, 0.0f, 1.0f));
+	// fixed4(i.uv * 2.0f - 1.0f, 0.0f, -1.0f) 就是将屏幕坐标（0,1）映射到（-1,1）
+	//unity_CameraInvProjection摄像机的逆投影矩阵。逆投影矩阵是投影矩阵的逆矩阵，用于将屏幕空间坐标变换到摄像机的世界坐标系中。
+	//简单来说这一行的代码的意思是获取屏幕上的某个点相对于相机的方向(在屏幕坐标系/投影空间下) 下面一行就是再变换到世界坐标系下
+	o.rayDir = normalize(mul(unity_CameraToWorld, fixed4(dir, 0.0f)));
+	return o;
+}</code></pre><p id="4958e152-db8b-406d-83d7-a577a6104bf7" class="">对于片元着色器我们有</p><pre id="d2fbbc24-407e-4987-8ef2-e432ee4a487f" class="code code-wrap"><code>fixed4 frag (v2f i) : SV_Target
+{
+const fixed step = 0.12; // 步进长度,就是光每一步走多少
+fixed3 lightPos = _WorldSpaceCameraPos;//将感知光子的坐标初始化为相机位置
+fixed3 dir = i.rayDir * step;//步进向量
+fixed3 color = fixed3(0,0,0)
+int stepSum= 350;//步进次数，也就是你能看多远。
+
+UNITY_LOOP
+for (int i = 0; i &lt; stepSum; i++)
+{  
+		fixed3 color += deal(lightPos);//对感知光子进行各种处理，看看有没有碰到什么,叠加感知到的颜色
+    lightPos+= dir;// 光子前进
+}
+
+return fixed4(color, 1);
+}</code></pre><h2 id="497424ec-c4bc-4bad-8dea-421ab404e833" class="">绘制事件视界</h2><p id="face9c32-4246-4ba3-ad87-21f1fa736299" class="">也就是绘制黑洞，我们假定黑洞是在原点放着，事件视界半径是1。</p><pre id="bc9328ee-f5ac-4d93-9903-b82fc6ea3964" class="code code-wrap"><code>fixed3 checkEventHorizon(fixed3 p){//检测p点是否在事件视界中
+    return length(p) - 1;
+}
+
+//在步进循环中有
+UNITY_LOOP
+for (int i = 0; i &lt; stepSum; i++)
+{  
+		if(checkEventHorizon(lightPos)&lt;0){
+			return fixed4(color, 1);//因为感知光子被吸走了不能再往后面看了，所以直接返回前面看到的
+		}
+    checkPos += dir;// 光子前进
+}
+
+return fixed4(color, 1);
+}</code></pre><h2 id="8989a898-009a-44b2-9af2-d4b26dbc0adf" class="">实现引力透镜</h2><p id="15037242-b67e-43f4-8556-420805dc5d9c" class="">引力透镜的本质就是光被扭曲了，所以我们只要模拟光在每一次步进时的扭曲就可以实现引力透镜</p><p id="3d37b493-8f5b-48c1-9cc3-ac6ce2014359" class="">具体光是怎么被扭曲的公式推导可以看：<a href="https://rantonels.github.io/starless/">Raytracing a Black Hole (rantonels.github.io)</a></p><p id="39a41f02-8e33-4678-bece-b350f91ee99b" class="">结果大概是：</p><figure id="8971e1c9-bbc0-4bb6-bc81-c2ee9ccd1c1a" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/Untitled.png"><img style="width:240px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/Untitled.png"/></a></figure><p id="78c4c97f-3f16-4dc2-b848-b502062f6c29" class="">这里直接采用大佬给出的偏差值计算方法：</p><pre id="950d0753-717e-4170-abb2-9d391703817d" class="code code-wrap"><code>fixed3 gravitationalLensing(fixed pH2, fixed3 pPosition)
+{
+    fixed r2 = dot(pPosition, pPosition);
+    fixed r5 = pow(r2, 2.5);
+    return -1.5 * pH2 * pPosition / r5;
+}
+ 
+fixed3 h = cross(lightPos, dir);
+fixed h2 = dot(h, h);
+// ...
+for (int i = 0; i &lt; stepSum; i++)
+{
+    // ...
+    // 引力透镜
+    fixed3 offset = gravitationalLensing(h2, lightPos);
+    dir += offset;
+ 
+    lightPos+= dir;
+}</code></pre><h2 id="6f2b11a3-0fa5-4dc8-9410-f3eeea1964b2" class="">绘制吸积盘</h2><p id="b64d862d-bb3c-43a8-ad03-9204c84b935b" class="">我们可以将吸积盘视作为一个圆环，或者是圆柱之类的，然后越靠近黑洞的转速越快越亮（越热）</p><p id="63ea2480-e104-4723-b49d-fa0d83a8b135" class="">首先要判断是否在吸积盘上，不在则返回黑色，具体判断在于不在取决于使用什么模型来实现吸积盘。比如圆环可以分别判断高度y是否符合，水平距离xz是否符合。</p><pre id="f9710ebb-acd9-4a5e-b589-2f2630ba9d55" class="code code-wrap"><code>
+if (length(position / fixed3(accretionDiskWidth,accretionDiskHeight, accretionDiskWidth)) &gt; 1)
+{
+    return fixed3(0, 0, 0);
+}
+//注意，由于引力透镜效应，看到的事件视界是实际上的2.6倍，所以长度小于2.6的点也应该返回黑色</code></pre><p id="f9da8c2d-7437-40aa-8a4b-9af40720b2d8" class="">其次实现越靠近越亮的效果：</p><pre id="d424b877-33a4-4097-8e1c-d8eb10d73d84" class="code code-wrap"><code>fixed fade = smoothstep(accretionDiskWidth-2.6，2.6,r);//这个2.6就是由于引力透镜效应，看到的事件视界是实际上的2.6倍</code></pre><p id="b91e26a0-114c-4bd8-93b7-9394459cf32b" class="">对于在吸积盘上的点，我们进行采样，使用的噪音图是</p><figure id="f4ec72c7-2b4f-4c8f-8072-a1cf7b76973b" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/noise15.jpg"><img style="width:718px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/noise15.jpg"/></a></figure><p id="3426c198-9777-4d29-8453-4a28346b13f6" class="">具体使用何种噪声图看个人选择，主要要能实现类似云雾的效果</p><p id="636bf5c7-46de-4d92-bd3e-e2f8653da6a7" class="">可以参考：<a href="https://huailiang.github.io/blog/2021/noise/">图形噪声 (huailiang.github.io)</a> 我的采样方法如下：</p><pre id="129eb16c-d3f6-42ce-b1b7-d99333da5247" class="code code-wrap"><code>fixed t = atan2(position.z, position.x);
+fixed p = asin(position.y / r)/3.14;
+fixed ti = _Time.x * 2;
+fixed n = tex2D(accretionDiskTex, fixed2(smoothstep(-3.14,3.14,t)+ti,
+	smoothstep(2.6,accretionDiskWidth,length(position.xz)+p)+ti)).r;
+n+=tex2D(accretionDiskWidth, fixed2(smoothstep(-3.14,3.14,t)+ti/2,
+	smoothstep(2.6,accretionDiskWidth,length(position.xz)+p)+ti/2)).r;
+n+=tex2D(accretionDiskWidth, fixed2(smoothstep(-3.14,3.14,t)+ti/4,
+	smoothstep(2.6,accretionDiskWidth,length(position.xz)+p)+ti/4)).r;</code></pre><p id="00ab55c4-8059-4c56-8882-03fd3f7ab342" class="">简单来说就是用方位角和天顶角作为uv进行采样，多次采样是因为噪音图不够密集，需要多次采样使得吸积盘没有那么空。</p><p id="6b9a6db9-111b-4a32-9ddd-07ef9f3fee4e" class="">搭配时间则可以做到旋转效果。</p><p id="7f15eb63-cf1a-4c8b-b9ea-55c8cca009bf" class="">而且采样我只取了rgba中的r分量，因为我只采样强度。</p><p id="ca9f60c1-6705-4877-a573-538f7a778a22" class="">最后用n乘以设定的颜色乘以设定的强度乘以fade则可以返回</p><pre id="593f5974-3f4d-46d5-a69b-282a86630ecd" class="code code-wrap"><code>return n*c * luminance*fade;</code></pre><h2 id="c0424c8c-f084-4d1d-baaa-565bdf6915ad" class="">喷流</h2><p id="393f97d2-200f-4439-b508-b0e6e61f478f" class="">喷流也类似于吸积盘，而且靠近黑洞侧是蓝色，远离黑洞侧是红色，所以需要进行颜色混合</p><pre id="62ff3e28-7d27-4209-bcd6-72790bf8485a" class="code code-wrap"><code>fixed3 sport(fixed3 position){
+    fixed sportRadius = 0.2;
+    int sportHeight = 15;
+    fixed sjr = 2.05;
+    if(dot(position.xz,position.xz)&lt;sportRadius*sportRadius&amp;&amp;abs(position.y)&lt;sportHeight&amp;&amp;abs(position.y)&gt;sjr){
+        fixed w = smoothstep(sjr,sportHeight,position.y);
+
+        fixed3 c = w*fixed3(0.3,0.3,0.6)+(1-w)*fixed3(0.6,0.3,0.3);
+        c = (1-smoothstep(0,sportRadius*sportRadius,dot(position.xz,position.xz)))*c;
+        c = (1-smoothstep(sjr,sportHeight,abs(position.y)))*c;
+        return c;  
+    }
+    else{
+        return fixed3(0,0,0);
+    }   
+}</code></pre><h2 id="47ed1177-ba1b-415a-a6a6-434fff8c46c0" class="">背景</h2><p id="1a9ff7f0-8f70-4038-aec9-c45c5e394238" class="">可以直接对天空盒采样然后加到颜色上（注意要在循环外）</p><pre id="ae794703-8249-4be6-a392-c81b3db68b3d" class="code code-wrap"><code>fixed4 skyBox = texCUBE(skyBoxTex, dir);//dir向远处射去
+color += DecodeHDR(skyBox, skyBoxTex_HDR).rgb*1.75;//1.75是提高天空盒亮度。</code></pre><figure id="0db22b1d-a56b-47c7-9ebc-aee83d36b3f0" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/MilkyWayPanorama8K.jpg"><img style="width:8192px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/MilkyWayPanorama8K.jpg"/></a></figure><p id="27d257aa-411d-4e8d-8060-b477b0d2deea" class="">注意 图像 Texture Shape要设置为cube</p><h1 id="efeb4ffd-febc-435d-a1e0-47929ba89ed9" class="">改进处理</h1><h2 id="bcd77a86-a848-4637-be6f-446ec6a002fe" class="">bloom</h2><p id="0b793ecd-a4bf-4397-b520-6eb74d91c722" class="">使用bloom来制作光晕。</p><h2 id="1e39f9a1-5fa1-4d4d-bf5a-b50a264db7bc" class=""><strong><strong>ToneMapping</strong></strong></h2><p id="7be97308-0625-4619-bdda-eb01ddfd6522" class="">改善光线步进叠加颜色导致的过曝。</p><p id="162c9e81-f715-4bc0-9003-18fdc632be72" class="">
+</p><h1 id="ffce982b-6a6d-4b66-8de3-10774ac1e92f" class="">效果展示</h1><p id="07f1b55f-6482-4b26-bb9c-706449837fe2" class="">
+</p><figure id="ece300e8-0cd1-43ee-a409-4881c932b823" class="image"><a href="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/Untitled%201.png"><img style="width:1116px" src="%E5%A6%82%E4%BD%95%E7%94%A8Unity%E7%AE%80%E5%8D%95%E6%B8%B2%E6%9F%93%E4%B8%80%E4%B8%AA%E9%BB%91%E6%B4%9E%201e0e469117ba45089564b45c1076a701/Untitled%201.png"/></a></figure><p id="a95f1c8a-7f21-407c-abdb-6f4059bb9ec5" class="">
+</p><h1 id="b2296faf-3e18-40f0-b405-2e9e0d347f96" class="">参考</h1><p id="2ec88519-8174-407e-b57a-160c45469af6" class=""><a href="https://zhuanlan.zhihu.com/p/105531637">如何渲染一个黑洞（一） - 知乎 (zhihu.com)</a></p><p id="d1eefa9a-7fce-484c-8269-3fc39c36d8cf" class=""><a href="https://www.cnblogs.com/GuyaWeiren/p/15376286.html">在Unity中渲染一个黑洞 - GuyaWeiren - 博客园 (cnblogs.com)</a></p><p id="0cbca32a-d8c0-4c21-b137-4fe8617ba6cb" class=""><a href="https://blog.csdn.net/ZJU_fish1996/article/details/89211634">[图形学] 实时体积云（Horizon: Zero Dawn）_ZJU_fish1996的博客-CSDN博客_体积云</a></p><p id="9754cfca-933a-4d87-b21a-186c14c51e9b" class=""><a href="https://rantonels.github.io/starless/">Raytracing a Black Hole (rantonels.github.io)</a></p><p id="88481a55-81f4-4b8b-9427-fdacb9c2d180" class=""><a href="https://www.codeproject.com/Articles/994466/Ray-Tracing-a-Black-Hole-in-Csharp">Ray Tracing a Black Hole in C# - CodeProject</a></p><p id="64dc9f37-c305-43d7-90bb-f555d241d0f7" class=""><a href="https://www.bilibili.com/video/BV19a4y17721">https://www.bilibili.com/video/BV19a4y17721</a></p><p id="5dae325e-1655-4cdf-8cd7-19fdf4c44d43" class=""><a href="https://www.bilibili.com/video/BV1R4411R71w/?vd_source=cbc391d5a2f0fde68f4a859775d6d9ee">【俗说宇宙】黑洞合集_哔哩哔哩_bilibili</a></p><p id="aece122c-408d-46e3-8b97-429edb704ca2" class="">
+</p></div></article></body></html>

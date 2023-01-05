@@ -1,0 +1,36 @@
+
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p>
+Yes, I can try to help you with this integral. The given integral is:
+
+$$\int_{150}^{+\infty} \frac{100}{x^2} , dx$$
+
+We can start by performing a substitution to make the integral easier to evaluate. Let $u = x^2$, so that $du = 2x ,
+dx$. Then the integral becomes:
+
+$$\int_{150}^{+\infty} \frac{100}{x^2} , dx = \frac{1}{2} \int_{150^2}^{\infty} \frac{1}{u} , du$$
+
+Now we can use the formula $\int \frac{1}{u} , du = \ln u + C$, where $C$ is a constant, to evaluate the integral:
+
+$$\frac{1}{2} \int_{150^2}^{\infty} \frac{1}{u} , du = \frac{1}{2} \left( \ln u \right) \Big|_{150^2}^{\infty} =
+\frac{1}{2} \left( \ln \infty - \ln 150^2 \right) = \frac{1}{2} \left( \infty - \ln 150^2 \right)$$
+
+The value of this integral is infinite, because the limit as $u$ approaches infinity is infinite. This means that the
+integral of this function is infinite for all values of $x$ greater than or equal to $150$.
+
+I hope this helps. Let me know if you have any other questions.
+</p>

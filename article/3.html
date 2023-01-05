@@ -2,159 +2,55 @@
 <html lang="zh">
 
 <head>
-	
 	<meta charset="utf-8" />
-	<title>ybycs的博客</title>
-	<meta name="description" content="Notion介绍">
-	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-	</script>
+	<base target="_blank">
 	<link rel="stylesheet" type="text/css" href="../baselayout.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-	<script>
-		$(".article-url").removeAttr("href");
-	</script>
-	<script>
-		$(document).ready(function () {
-			var i = -1;
-			addTips = function (e) {
-				var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信",
-					"友善");
-				var s = $("<span/>").text(a[i]);
-				i = (i + 1) % a.length;
-				var x = e.pageX,
-					y = e.pageY;
-
-
-				s.css({
-					"z-index": 9999999999999,
-					"top": y - 20,
-					"left": x,
-					"position": "absolute",
-					"font-weight": "bold",
-					"color": "#ff6651"
-				});
-				$("body").append(s);
-
-				s.animate({
-					"top": y - 180,
-					"opacity": 0
-				}, 1000, function () {
-					s.remove();
-				});
-			}
-			$("body").click(addTips);
-			$("body").bind("contextmenu", addTips);
-		});
-
-		function search() {
-			var value = document.getElementById("searchText");
-			window.open("https://www.bing.com/search?q=" + value.value);
-		}
-	</script>
-<script src="../js/sakura.js"></script>
 </head>
 
 <body lang="zh">
-	
-	<div id="page-container">
-		<div id="page-header">
-			<div id="header-container">
-				<a href="../index.html" rel="noopener">
-					<span>首页</span>
-				</a>
-				<a href="../friendlink.html" rel="noopener">
-					<span>友链</span>
-				</a>
-				<a href="../about.html" rel="noopener">
-					<span>关于</span>
-				</a>
-				<a href="../massage.html" rel="noopener">
-					<span>留言</span>
-				</a>
-				<a rel="noopener" href="https://github.com/YBYCS/YBYCS.github.io" style="float:right;" title="Download on GitHub">
-					<i class="fab fa-github "></i>
-				</a>
-				
-				<div id="search">
-					<form>
-						<input id="searchText" type="text" name="search">
-
-						<i onclick="search()" class="fas fa-search" style="color: white;"></i>
-					</form>
-
-				</div>
-			</div>
+	<div class="article-container">
+		<div class="article-lead">
+			<h1 class="article-title">
+				Notion介绍
+			</h1>
+			<a href="http://www.notion.so/" target="_blank" class="quote">notion官方地址</a>
+			<br />
+			<h2>Notion是什么</h2>
+			<p>notion是以block为核心设计理念的一款多端笔记软件,被誉为程序员最后一款笔记软件,可以说是一款All in One的协作平台,
+				兼顾了Word,Trello,Airtable的组合</p>
 		</div>
-		<div id="page-body">
-			<div id="content-container" >
-				<div class="toolbar"></div>
-				<div id="page-content" >
-					<!-- 左界面 -->
-					<div id="page-left-container">
-						<div id="showmyself">
-							
-							<img src="../img/Himeno Sena.jpg" width="75%" />
-							<h1 style="margin: 1px;">YBYCS</h1>
-							<h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
-							
-							<a style="color: black;" target="_blank" rel="noopener" title="Email" href="mailto:1738146845@qq.com">
-								<i class="fas fa-envelope"></i>
-							</a>
-						</div>
-					</div>
-					<!-- 右界面 -->
-					<div id="page-right-container">
-						<div class="article-container">
-							<div class="article-lead">
-								<h1 class="article-title">
-									Notion介绍
-								</h1>
-								<a href="http://www.notion.so/"  target="_blank" class="quote">notion官方地址</a>
-								<br/>
-								<h2>Notion是什么</h2>
-								<p>notion是以block为核心设计理念的一款多端笔记软件,被誉为程序员最后一款笔记软件,可以说是一款All in One的协作平台,
-									兼顾了Word,Trello,Airtable的组合</p>
-							</div>
-							<div id="article-more">
-								<h2>notion的优缺点</h2>
-								
-								<p>
-									<h3>优点</h3>
-									<ol>
-										<li>以block为核心的设计观念,搭配无限层级的引用,可以说给notion带来了极大的拓展性质</li>
-										<li>notion的数据库体系,使得其具有管理规划的功能</li>
-										<li>优秀的布局排版,美丽简化的界面,可以说是正中程序员的好球区了</li>
-										<li>自带看板,all in one使得不再需要数据迁移</li>									
-										<li>教育账户免费试用</li>
-										
-									</ol>
-									<h3>缺点</h3>
-									<ol>
-										<li>服务器在国外,可能会有各种各样的问题</li>
-										<li>没有原生的悬浮框目录,没有原生的悬浮框目录,没有原生的悬浮框目录</li>
-										
-									</ol>
-								</p>
-								<h2>效果展示</h2>
-								<img src="../img/notion1.png" width="100%" />
-								<img src="../img/notion2.png" width="100%" />
-								<img src="../img/notion3.png" width="100%" />
-								<img src="../img/notion4.png" width="100%" />
+		<div id="article-more">
+			<h2>notion的优缺点</h2>
 
-								
+			<p>
+				<h3>优点</h3>
+				<ol>
+					<li>以block为核心的设计观念,搭配无限层级的引用,可以说给notion带来了极大的拓展性质</li>
+					<li>notion的数据库体系,使得其具有管理规划的功能</li>
+					<li>优秀的布局排版,美丽简化的界面,可以说是正中程序员的好球区了</li>
+					<li>自带看板,all in one使得不再需要数据迁移</li>
+					<li>教育账户免费试用</li>
 
-							</div>
-							
-						</div>
-						
-					</div>
-					<!--取消浮动并且占据一个位置-->
-					<div style="clear: both;" border:true></div>
-				</div>
-			</div>
+				</ol>
+				<h3>缺点</h3>
+				<ol>
+					<li>服务器在国外,可能会有各种各样的问题</li>
+					<li>没有原生的悬浮框目录,没有原生的悬浮框目录,没有原生的悬浮框目录</li>
+
+				</ol>
+			</p>
+			<h2>效果展示</h2>
+			<img src="../img/notion1.png" width="100%" />
+			<img src="../img/notion2.png" width="100%" />
+			<img src="../img/notion3.png" width="100%" />
+			<img src="../img/notion4.png" width="100%" />
+
+
+
 		</div>
+
 	</div>
-
 </body>
 
 </html>
