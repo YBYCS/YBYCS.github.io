@@ -9,7 +9,7 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
     </script>
     <link rel="stylesheet" type="text/css" href="../baselayout.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"> -->
     <script>
         $(".article-url").removeAttr("href");
     </script>
@@ -92,7 +92,7 @@
                 <div id="page-content">
                     <!-- 左界面 -->
                     <div id="page-left-container">
-                        <div id="showmyself">
+                        <!-- <div id="showmyself">
 
                             <img src="../img/Himeno Sena.jpg" width="75%" />
                             <h1 style="margin: 1px;">YBYCS</h1>
@@ -102,13 +102,23 @@
                                 href="mailto:1738146845@qq.com">
                                 <i class="fas fa-envelope"></i>
                             </a>
-                        </div>
+                        </div> -->
+                        <!-- 文章导航 -->
+                        <aside class="sidebar">
+                            <nav>
+                                <ul id="outlineUlHead">
+
+
+                                </ul>
+                            </nav>
+                        </aside>
+
                     </div>
                     <!-- 右界面 -->
                     <div id="page-right-container">
                         <div class="article-container">
                             <div id="article-more">
-                                <iframe id="if" style="width:100%;height: 100%;" scrolling="no"
+                                <iframe name="article" id="if" style="width:100%;height: 100%;" scrolling="no"
                                     frameborder="0"></iframe>
                             </div>
 
@@ -129,6 +139,53 @@
         iframe.src = www;
         iframe.onload = function () {
             content.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
+            // get the document inside the iframe
+            var doc = iframe.contentDocument;
+            //get all the h1, h2 and h3 elements
+            var headers = doc.querySelectorAll('h1, h2, h3,h4,h5,h6');
+            var i = 0;
+            headers.forEach(function (header) {
+                // generate a unique id for the header
+                var id = "titleIndex" + i;
+                //建立锚点
+                var an = document.createElement("a");
+                an.setAttribute("href", "#" + id);
+                an.classList.add("headerAnchor");
+                header.appendChild(an);
+                header.setAttribute("id", id);
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = doc.location.href + "#titleIndex" + i;
+                a.target = "article"
+                a.innerHTML = header.innerHTML;
+                a.classList.add("toc");
+                switch (header.tagName) {
+                    case "H1":
+                        a.classList.add("toch1");
+                        break;
+                    case "H2":
+                        a.classList.add("toch2");
+                        break;
+                    case "H3":
+                        a.classList.add("toch3");
+                        break;
+                    case "H4":
+                        a.classList.add("toch4");
+                        break;
+                    case "H5":
+                        a.classList.add("toch5");
+                        break;
+                    case "H6":
+                        a.classList.add("toch6");
+                        break;
+                }
+                li.appendChild(a);
+                document.getElementById("outlineUlHead").appendChild(li);
+                i++;
+            });
+            //            var anchorElement = doc.getElementById("titleIndex4");
+            //          console.log(doc);
+            //        anchorElement.scrollIntoView();
         }
     </script>
 </body>
