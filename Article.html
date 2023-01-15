@@ -54,7 +54,7 @@
     <script src="../js/sakura.js"></script>
 </head>
 
-<body lang="zh">
+<body lang="zh" style="overflow: hidden;">
 
     <div id="page-container">
         <div id="page-header">
@@ -116,10 +116,10 @@
                     </div>
                     <!-- 右界面 -->
                     <div id="page-right-container">
-                        <div class="article-container">
+                        
                             <div id="article-more">
-                                <iframe name="article" id="if" style="width:100%;height: 100%;" scrolling="no"
-                                    frameborder="0"></iframe>
+                                <iframe name="article" id="if" class="iframeArticle" frameborder="0"></iframe>
+
                             </div>
 
                         </div>
@@ -151,6 +151,7 @@
                 var an = document.createElement("a");
                 an.setAttribute("href", "#" + id);
                 an.classList.add("headerAnchor");
+                //an.innerHTML = "#";
                 header.appendChild(an);
                 header.setAttribute("id", id);
                 var li = document.createElement("li");
@@ -183,9 +184,22 @@
                 document.getElementById("outlineUlHead").appendChild(li);
                 i++;
             });
-            //            var anchorElement = doc.getElementById("titleIndex4");
-            //          console.log(doc);
-            //        anchorElement.scrollIntoView();
+            //var anchorElement = doc.getElementById("titleIndex4");
+            //console.log(doc);
+            //anchorElement.scrollIntoView(true);
+            // 获取iframe中的document对象
+            var iframeDoc = iframe.contentDocument;
+
+            // 创建一个新的style元素
+            var newStyle = iframeDoc.createElement('style');
+
+            // 设置样式
+            newStyle.innerHTML = '::-webkit-scrollbar {width: 8px;background-color: ##aad9ff;}::-webkit-scrollbar-thumb{background-color: #8ec8ff;}';
+
+            // 将样式添加到iframe中的head元素中
+            iframeDoc.head.appendChild(newStyle);
+
+
         }
     </script>
 </body>
