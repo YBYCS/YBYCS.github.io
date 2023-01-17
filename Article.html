@@ -116,26 +116,28 @@
                     </div>
                     <!-- 右界面 -->
                     <div id="page-right-container">
-                        
-                            <div id="article-more">
-                                <iframe name="article" id="if" class="iframeArticle" frameborder="0"></iframe>
 
-                            </div>
+                        <div id="article-more">
+                            <iframe name="article" id="if" class="iframeArticle" frameborder="0"></iframe>
 
                         </div>
 
                     </div>
-                    <!--取消浮动并且占据一个位置-->
-                    <div style="clear: both;" border:true></div>
+
                 </div>
+                <!--取消浮动并且占据一个位置-->
+                <div style="clear: both;" border:true></div>
             </div>
         </div>
+    </div>
     </div>
     <script>
         var iframe = document.getElementById("if");
         var content = document.getElementById("article-more");
         const searchParams = new URLSearchParams(window.location.search);
         const www = searchParams.get("www");
+        //上次浏览到的标题
+        var lastTitle = null;
         iframe.src = www;
         iframe.onload = function () {
             content.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
@@ -144,6 +146,7 @@
             //get all the h1, h2 and h3 elements
             var headers = doc.querySelectorAll('h1, h2, h3,h4,h5,h6');
             var i = 0;
+            var anchors = [];
             headers.forEach(function (header) {
                 // generate a unique id for the header
                 var id = "titleIndex" + i;
@@ -154,12 +157,18 @@
                 //an.innerHTML = "#";
                 header.appendChild(an);
                 header.setAttribute("id", id);
+                //获取标题的位置
+                var position = header.getBoundingClientRect().top + iframe.contentWindow.scrollY;
+                //把信息存储下来
+                anchors.push({id:id,position:position});
                 var li = document.createElement("li");
                 var a = document.createElement("a");
+                a.id = id;
                 a.href = doc.location.href + "#titleIndex" + i;
                 a.target = "article"
                 a.innerHTML = header.innerHTML;
                 a.classList.add("toc");
+                //给标题标签记录上不同的类，根据缩进实现有层次的目录大纲
                 switch (header.tagName) {
                     case "H1":
                         a.classList.add("toch1");
@@ -188,16 +197,44 @@
             //console.log(doc);
             //anchorElement.scrollIntoView(true);
             // 获取iframe中的document对象
-            var iframeDoc = iframe.contentDocument;
+
 
             // 创建一个新的style元素
-            var newStyle = iframeDoc.createElement('style');
+            var newStyle = doc.createElement('style');
 
             // 设置样式
-            newStyle.innerHTML = '::-webkit-scrollbar {width: 8px;background-color: ##aad9ff;}::-webkit-scrollbar-thumb{background-color: #8ec8ff;}';
+            newStyle.innerHTML =
+                '::-webkit-scrollbar {width: 8px;background-color: #aad9ff;}::-webkit-scrollbar-thumb{background-color: #8ec8ff;}';
 
             // 将样式添加到iframe中的head元素中
-            iframeDoc.head.appendChild(newStyle);
+            doc.head.appendChild(newStyle);
+
+            iframe.contentWindow.addEventListener('scroll', function(){
+                var currentPosition = iframe.contentWindow.scrollY;
+                console.log(currentPosition);
+                var currentTitle = null;
+                for(var i=0; i<anchors.length; i++) {
+                    if(Math.abs(currentPosition - anchors[i].position)<50){
+                        currentTitle = anchors[i];
+                        console.log(currentTitle);
+                        break;
+                    }
+                }
+                if(currentTitle){
+                    if(lastTitle){
+                        lastTitle.classList.remove('active');
+                    }
+                    lastTitle = document.getElementById(currentTitle.id);
+                    lastTitle.classList.add('active');
+                }
+            })
+
+            //iframe.contentDocument.onclick = function () {
+            //    console.log(1);
+            //};
+            //iframe.contentDocument.body.onhashchange = function () {
+            //    alert("锚部分已修改！");
+            //};
 
 
         }

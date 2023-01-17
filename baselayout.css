@@ -240,6 +240,21 @@ body {
 	margin-top: -100px;
 }
 
+.toch2{
+	padding-inline-start: 20px;
+}
+.toch3{
+	padding-inline-start: 40px;
+}
+.toch4{
+	padding-inline-start: 60px;
+}
+.toch5{
+	padding-inline-start: 80px;
+}
+.toch6{
+	padding-inline-start: 100px;
+}
 #outlineUlHead {
 	overflow: hidden;
 	margin-bottom: .75rem;
