@@ -8,7 +8,7 @@
     <title>ybycs的博客</title>
     <link rel="stylesheet" type="text/css" href="/baselayout.css">
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="/js/sakura.js"></script>
 
 
@@ -83,10 +83,10 @@
                 <div id="search">
                     <form>
                         <input id="searchText" type="text" name="search">
-
-                        <i onclick="search()" class="fas fa-search" style="color: white;"></i>
                     </form>
-
+                    <a onclick="search()" style="float:right;">
+                        <i class="fas fa-search" ></i>
+                    </a>
                 </div>
 
             </div>
@@ -154,7 +154,8 @@
 
             const pageContainer = document.getElementById("pageCardContainer")
             for (var i = 0; i <= data.articles.length / (maxPage + 1); i++) {
-                var str = "<div class=\"pageCard canClick selected-page\"><a href=\"/index.html?page=" + (i + 1) +"\" rel=\"noopener\"style=\"text-decoration:none;color:#000\">" + (i + 1) + "</a></div>";
+                var str = "<div class=\"pageCard canClick selected-page\"><a href=\"/index.html?page=" + (i + 1) +
+                    "\" rel=\"noopener\"style=\"text-decoration:none;color:#000\">" + (i + 1) + "</a></div>";
                 pageContainer.innerHTML += str;
             }
 

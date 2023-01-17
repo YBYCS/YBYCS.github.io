@@ -11,7 +11,7 @@ body {
 }
 
 #page-header {
-	background-color: cornflowerblue;
+	background-color: rgb(33, 77, 158);
 	width: 100vw;
 	height: 56px;
 	position: fixed;
@@ -40,17 +40,22 @@ body {
 }
 
 #page-header a:hover {
-	background-color: aquamarine;
+	background-color: rgb(194, 255, 234);
 	transform: background-color 0.1s;
 
+}
+#page-header a:hover span {
+	color: black;
 }
 
 #page-header i:hover {
-	background-color: aquamarine;
+	background-color: rgb(194, 255, 234);
 	transform: background-color 0.1s;
 
 }
-
+ a:hover i{
+	color: black;
+}
 #search {
 	FONT-VARIANT: JIS83;
 	display: flex;
@@ -109,7 +114,7 @@ body {
 	border-radius: 5px;
 	background-color: #ffffff;
 
-	padding: 0px 5px;
+	padding: 0px 15px;
 }
 
 #nav {
@@ -331,7 +336,18 @@ body {
 	color: black;
 	text-decoration: none;
 }
-
+.article-lead h1 {
+	margin-block-start: 16px;
+	margin-block-end:16px;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+.article-lead p {
+	margin-block-start: 0em;
+	margin-block-end: 8px;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
 .toolbar {
 	float: right;
 	margin-inline-end: 4px;
