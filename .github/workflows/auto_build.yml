@@ -1,9 +1,7 @@
 # auto_build
 name: auto deploy blog to ecs
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
