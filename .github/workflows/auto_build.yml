@@ -7,14 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to server
-        uses: actions/ssh-action@v1
+        uses: actions/ssh-client@v1
         with:
           ssh-private-key: ${{secrets.SERVER_SSH_KEY}}
           ssh-command: |
             cd /var/www/html
             git pull origin master
       - name: Restart nginx
-        uses: actions/ssh-action@v1
+        uses: actions/ssh-client@v1
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
           ssh-command: |
