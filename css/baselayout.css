@@ -5,7 +5,7 @@ body {
 }
 
 #page-container {
-
+	position: absolute;
 	width: 100%;
 
 }
@@ -44,6 +44,7 @@ body {
 	transform: background-color 0.1s;
 
 }
+
 #page-header a:hover span {
 	color: black;
 }
@@ -53,9 +54,11 @@ body {
 	transform: background-color 0.1s;
 
 }
- a:hover i{
+
+a:hover i {
 	color: black;
 }
+
 #search {
 	FONT-VARIANT: JIS83;
 	display: flex;
@@ -84,8 +87,11 @@ body {
 }
 
 #page-left-container {
-	width: 33%;
+	width: 32%;
 	float: left;
+	position: relative;
+	height: 100vh;
+
 }
 
 #page-left-container div {
@@ -105,6 +111,9 @@ body {
 #page-right-container {
 	width: 66%;
 	float: right;
+	position: relative;
+	height: 100vh;
+
 
 }
 
@@ -140,21 +149,18 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: left;
-	margin: 0px;
-	margin-bottom: 5px;
-	border: 3px solid #ffffff;
-	border-radius: 5px;
-	background-color: #ffffff;
 	height: 100%;
-	width: 40%;
-	padding: 0px 5px;
-	position: fixed;
+	width: 100%;
+	position: absolute;
+
 }
-.iframeContainer{
+
+.iframeContainer {
 	width: 100%;
 	height: 100%;
 	overflow-y: auto;
 }
+
 .iframeContainer ::-webkit-scrollbar {
 	width: 5px;
 	height: 5px;
@@ -181,6 +187,7 @@ body {
 .iframeContainer ::-webkit-scrollbar-track {
 	background-color: #f1f1f1;
 }
+
 ::-webkit-scrollbar {
 	width: 8px;
 	background-color: #3e84bd;
@@ -189,6 +196,7 @@ body {
 ::-webkit-scrollbar-thumb {
 	background-color: #c0e1ff;
 }
+
 .sidebar {
 	overflow-y: auto;
 	display: flex;
@@ -200,9 +208,9 @@ body {
 	border-radius: 5px;
 	background-color: #ffffff;
 	height: 100%;
-	width: 20%;
+	width: 100%;
 	padding: 0px 5px;
-	position: fixed;
+	position: absolute;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -245,21 +253,26 @@ body {
 	margin-top: -100px;
 }
 
-.toch2{
+.toch2 {
 	padding-inline-start: 20px;
 }
-.toch3{
+
+.toch3 {
 	padding-inline-start: 40px;
 }
-.toch4{
+
+.toch4 {
 	padding-inline-start: 60px;
 }
-.toch5{
+
+.toch5 {
 	padding-inline-start: 80px;
 }
-.toch6{
+
+.toch6 {
 	padding-inline-start: 100px;
 }
+
 #outlineUlHead {
 	overflow: hidden;
 	margin-bottom: .75rem;
@@ -322,32 +335,37 @@ body {
 
 .article-container {
 	border: 3px solid #ffffff;
-	border-radius: 5px;
-	background-color: #ffffff;
 
-	padding: 0px 5px;
+	background-color: #ffffff;
 }
 
 .article-more {
-	margin: 10px;
+	border-radius: 5px;
+	width: 100%;
+	background-color: #fff;
+	height: 100%;
+	position: absolute;
 }
 
 .article-title a {
 	color: black;
 	text-decoration: none;
 }
+
 .article-lead h1 {
 	margin-block-start: 16px;
-	margin-block-end:16px;
+	margin-block-end: 16px;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
 }
+
 .article-lead p {
 	margin-block-start: 0em;
 	margin-block-end: 8px;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
 }
+
 .toolbar {
 	float: right;
 	margin-inline-end: 4px;

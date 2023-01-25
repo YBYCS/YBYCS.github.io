@@ -1,0 +1,48 @@
+#article-header {
+  background-color: rgb(33, 77, 158);
+  width: 100vw;
+  height: 56px;
+  z-index: 100;
+  display: flex;
+}
+
+#article-body {
+  position: relative;
+  width: 100%;
+  display: flex;
+
+  margin: 0;
+}
+
+#article-left-container {
+  position: fixed;
+  top: 60px;
+  /* 设置顶部距离 */
+  height: calc(100% - 60px);
+  /* 减去顶部 60px */
+  width: 20%;
+
+}
+
+#article-right-container {
+  position: fixed;
+  top: 60px;
+  /* 设置顶部距离 */
+  height: calc(100% - 60px);
+  /* 减去顶部 60px */
+  width: 62%;
+}
+
+#article-left {
+  width: 30%;
+  float: left;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+}
+
+#article-right {
+
+  width: 75%;
+  float: left;
+}

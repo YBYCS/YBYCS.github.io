@@ -6,10 +6,12 @@
     <meta charset="utf-8" />
     <title>ybycs的博客</title>
     <meta name="description" content="浅谈C#GC">
-    <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.3/jquery.min.js">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
     </script>
-    <link rel="stylesheet" type="text/css" href="../baselayout.css">
-    <!-- <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/baselayout.css">
+    <link rel="stylesheet" type="text/css" href="/css/article.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    
     <script>
         $(".article-url").removeAttr("href");
     </script>
@@ -86,61 +88,46 @@
                 </div>
             </div>
         </div>
-        <div id="page-body">
-            <div id="content-container">
-                <div class="toolbar"></div>
-                <div id="page-content">
-                    <!-- 左界面 -->
-                    <div id="page-left-container">
-                        <!-- <div id="showmyself">
-
-                            <img src="../img/Himeno Sena.jpg" width="75%" />
-                            <h1 style="margin: 1px;">YBYCS</h1>
-                            <h3 style="margin: 1px;">苟利星奏生死以,岂因新岛避趋之</h3>
-
-                            <a style="color: black;" target="_blank" rel="noopener" title="Email"
-                                href="mailto:1738146845@qq.com">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </div> -->
-                        <!-- 文章导航 -->
-                        <aside class="sidebar">
-                            <nav>
-                                <ul id="outlineUlHead">
+        <div id="article-body">
+            <!-- 左界面 -->
+            <div id="article-left">
+                <div id="article-left-container">
+                    <aside class="sidebar">
+                        <nav>
+                            <ul id="outlineUlHead">
 
 
-                                </ul>
-                            </nav>
-                        </aside>
-
-                    </div>
-                    <!-- 右界面 -->
-                    <div id="page-right-container">
-
-                        <div id="article-more">
-                            <iframe name="article" id="if" class="iframeArticle" frameborder="0"></iframe>
-
-                        </div>
-
-                    </div>
-
+                            </ul>
+                        </nav>
+                    </aside>
                 </div>
-                <!--取消浮动并且占据一个位置-->
-                <div style="clear: both;" border:true></div>
+                <!-- 文章导航 -->
+            </div>
+
+            <!-- 右界面 -->
+            <div id="article-right">
+                <div id="article-right-container">
+                    <div id="iframeContainer" class="article-more">
+                        <iframe name="article" id="if" class="iframeArticle" frameborder="0"></iframe>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    </div>
     <script>
         var iframe = document.getElementById("if");
-        var content = document.getElementById("article-more");
+        var ac = document.getElementById("iframeContainer");
         const searchParams = new URLSearchParams(window.location.search);
         const www = searchParams.get("www");
         //上次浏览到的标题
         var lastTitle = null;
         iframe.src = www;
         iframe.onload = function () {
-            content.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
+            if (iframe.offsetHeight >= iframe.contentWindow.document.body.scrollHeight) {
+
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
+            }
             // get the document inside the iframe
             var doc = iframe.contentDocument;
             //get all the h1, h2 and h3 elements
@@ -160,7 +147,10 @@
                 //获取标题的位置
                 var position = header.getBoundingClientRect().top + iframe.contentWindow.scrollY;
                 //把信息存储下来
-                anchors.push({id:id,position:position});
+                anchors.push({
+                    id: id,
+                    position: position
+                });
                 var li = document.createElement("li");
                 var a = document.createElement("a");
                 a.id = id;
@@ -194,7 +184,6 @@
                 i++;
             });
             //var anchorElement = doc.getElementById("titleIndex4");
-            //console.log(doc);
             //anchorElement.scrollIntoView(true);
             // 获取iframe中的document对象
 
@@ -209,19 +198,17 @@
             // 将样式添加到iframe中的head元素中
             doc.head.appendChild(newStyle);
 
-            iframe.contentWindow.addEventListener('scroll', function(){
+            iframe.contentWindow.addEventListener('scroll', function () {
                 var currentPosition = iframe.contentWindow.scrollY;
-                console.log(currentPosition);
                 var currentTitle = null;
-                for(var i=0; i<anchors.length; i++) {
-                    if(Math.abs(currentPosition - anchors[i].position)<50){
+                for (var i = 0; i < anchors.length; i++) {
+                    if (Math.abs(currentPosition - anchors[i].position) < 50) {
                         currentTitle = anchors[i];
-                        console.log(currentTitle);
                         break;
                     }
                 }
-                if(currentTitle){
-                    if(lastTitle){
+                if (currentTitle) {
+                    if (lastTitle) {
                         lastTitle.classList.remove('active');
                     }
                     lastTitle = document.getElementById(currentTitle.id);
@@ -230,7 +217,6 @@
             })
 
             //iframe.contentDocument.onclick = function () {
-            //    console.log(1);
             //};
             //iframe.contentDocument.body.onhashchange = function () {
             //    alert("锚部分已修改！");
