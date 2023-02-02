@@ -3,7 +3,16 @@ body {
 	background-color: #c9c9c9;
 	margin: 0;
 }
+#icp-container{
+	  color: inherit;
+	  
+	  text-align: center;
+	  width: 100%;
+}
+#icp-container a {
+	text-decoration: none;
 
+}
 #page-container {
 	position: absolute;
 	width: 100%;
@@ -190,11 +199,11 @@ a:hover i {
 
 ::-webkit-scrollbar {
 	width: 8px;
-	background-color: #3e84bd;
+	background-color: #c0e1ff;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #c0e1ff;
+	background-color: #3e84bd;
 }
 
 .sidebar {
