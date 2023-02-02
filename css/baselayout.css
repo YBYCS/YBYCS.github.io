@@ -11,7 +11,7 @@ body {
 }
 #icp-container a {
 	text-decoration: none;
-
+	color: rgb(55, 51, 51);
 }
 #page-container {
 	position: absolute;

@@ -126,9 +126,9 @@
                     <div style="clear: both;" border:true></div>
                 </div>
             </div>
-                <div id="icp-container">
-                    <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2023007063号</a>
-                </div>
+            <div id="icp-container">
+                <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2023007063号</a>
+            </div>
         </div>
     </div>
 
@@ -146,10 +146,10 @@
             const searchParams = new URLSearchParams(window.location.search);
             var page = searchParams.get("page");
             if (page == null) {
-                page = 0;
+                page = 1;
             }
             var maxPage = 6;
-            for (var i = 0 + page * maxPage; i < (page + 1) * maxPage && i < data.articles.length; i++) {
+            for (var i =  (page-1) * maxPage; i < page * maxPage && i < data.articles.length; i++) {
                 var str = " <div class=\"article-lead canClick\" onclick=\"window.open('Article.html?www=" + data
                     .articles[i].www + "', '_blank');\"><h1 class=\"article-title\">" + data.articles[i].title +
                     "</h1><p>" + data.articles[i].brief + "</p></div>";
