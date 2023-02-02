@@ -146,9 +146,11 @@
             const searchParams = new URLSearchParams(window.location.search);
             var page = searchParams.get("page");
             if (page == null) {
+                //默认从第一页开始
                 page = 1;
             }
-            var maxPage = 6;
+            var maxPage = 7;
+            //动态添加页面
             for (var i =  (page-1) * maxPage; i < page * maxPage && i < data.articles.length; i++) {
                 var str = " <div class=\"article-lead canClick\" onclick=\"window.open('Article.html?www=" + data
                     .articles[i].www + "', '_blank');\"><h1 class=\"article-title\">" + data.articles[i].title +
@@ -157,6 +159,7 @@
             }
 
             const pageContainer = document.getElementById("pageCardContainer")
+            //动态添加页数
             for (var i = 0; i <= data.articles.length / (maxPage + 1); i++) {
                 var str = "<div class=\"pageCard canClick selected-page\"><a href=\"/index.html?page=" + (i + 1) +
                     "\" rel=\"noopener\"style=\"text-decoration:none;color:#000\">" + (i + 1) + "</a></div>";
