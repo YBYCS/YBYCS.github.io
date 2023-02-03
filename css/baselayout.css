@@ -3,16 +3,19 @@ body {
 	background-color: #c9c9c9;
 	margin: 0;
 }
-#icp-container{
-	  color: inherit;
-	  
-	  text-align: center;
-	  width: 100%;
+
+#icp-container {
+	color: inherit;
+
+	text-align: center;
+	width: 100%;
 }
+
 #icp-container a {
 	text-decoration: none;
 	color: rgb(55, 51, 51);
 }
+
 #page-container {
 	position: absolute;
 	width: 100%;
@@ -99,7 +102,7 @@ a:hover i {
 	width: 32%;
 	float: left;
 	position: relative;
-	height: 100vh;
+	/* height: 100vh; */
 
 }
 
@@ -121,7 +124,7 @@ a:hover i {
 	width: 66%;
 	float: right;
 	position: relative;
-	height: 100vh;
+	/* height: 100vh; */
 
 
 }
@@ -324,19 +327,28 @@ a:hover i {
 	justify-content: center;
 	align-items: center;
 }
-
-.pageCard {
-	margin-right: 10px;
+#page-right .pageCardContainer{
+	padding: 0;
+	border: 0;
+	margin-bottom:0;
 }
 
 #page-right .selected-page {
-	background-color: rgb(255, 237, 165);
-}
-
-#page-right .pageCard {
+	background-color: rgb(105, 205, 252);
 	border: 1px solid #a4a4a4;
 	border-radius: 5px;
+	margin-right: 10px;
+	width: 5px;
+	/* padding-right: 10px;
+	padding-left: 10px; */
+	padding: 0px 10px;
+	margin-bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 75%;
 }
+
 
 .canClick {
 	cursor: pointer;

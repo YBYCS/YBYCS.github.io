@@ -119,15 +119,23 @@
                             <div id="pageSelectContainer" class="pageSelectContainer">
                                 <div id="pageCardContainer" class="pageCardContainer">
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
+
                     <!--取消浮动并且占据一个位置-->
                     <div style="clear: both;" border:true></div>
+
                 </div>
+
             </div>
-            <div id="icp-container">
-                <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2023007063号</a>
+
+        </div>
+        <div id="page-foot">
+            <div id="icp-container"">
+                <a href=" http://beian.miit.gov.cn/" target="_blank">粤ICP备2023007063号</a>
             </div>
         </div>
     </div>
@@ -151,7 +159,7 @@
             }
             var maxPage = 7;
             //动态添加页面
-            for (var i =  (page-1) * maxPage; i < page * maxPage && i < data.articles.length; i++) {
+            for (var i = (page - 1) * maxPage; i < page * maxPage && i < data.articles.length; i++) {
                 var str = " <div class=\"article-lead canClick\" onclick=\"window.open('Article.html?www=" + data
                     .articles[i].www + "', '_blank');\"><h1 class=\"article-title\">" + data.articles[i].title +
                     "</h1><p>" + data.articles[i].brief + "</p></div>";
