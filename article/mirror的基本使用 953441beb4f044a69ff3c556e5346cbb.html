@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>mirror的基本使用</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="953441be-b4f0-44a6-9ff3-c556e5346cbb" class="page sans"><header><h1 class="page-title">mirror的基本使用</h1></header><div class="page-body"><p id="b5f45c4b-753e-430b-aa7b-c4adadf106e8" class="">阅读本文需要基本的网络游戏架构知识的了解，比如常见的网络同步方案如帧同步，状态同步是怎么运作的。</p><h1 id="ad4a3793-bb73-477c-b01a-7e2b5dc55392" class="">什么是mirror?</h1><p id="5d732c69-e9fd-4096-b0eb-fe596b8066f5" class="">mirror是一款联机游戏解决方案插件，和unity的Unet十分的类似，但是修了很多bug。其中mirror的网络方案是状态同步。</p><h1 id="f4553cd0-6435-4561-89db-63e9442b13e2" class="">如何获取mirror？</h1><p id="5f2ad91e-d62b-4b06-910b-af67be137a49" class="">需要在App Store中获取，然后再packagemanager中导入。</p><h1 id="eab58615-4a83-4a8d-8405-70149256bf77" class="">mirror快速上手</h1><p id="f355998a-b5cb-4e42-a3b1-bfcbca4f9227" class=""><a href="https://mirror-networking.gitbook.io/">https://mirror-networking.gitbook.io/</a>这里是mirror的官方文档</p><h2 id="5965d4dc-9058-4560-a52d-e265ddfcba70" class=""><strong><strong>Network Manager</strong></strong></h2><p id="bb557ae4-ae15-4617-8718-328812030597" class="">首先mirror最核心的是networkmanager，我们应该先在开始场景创建一个空对象作为networkmanager，然后挂载<strong><strong>Network Manager</strong></strong>组件</p><figure id="b66ca927-fc66-418d-ac29-67238fb380fe" class="image"><a href="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/image.png"><img style="width:421px" src="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/image.png"/></a></figure><p id="cea1df53-03ea-4f6a-98b0-e53bcc7535cf" class="">首先在意Scene Management下的offline Scene 和 Online Scene</p><p id="6219527e-ece0-41a7-bf1a-2daf1a56c091" class="">
+</p><p id="379ab942-a0e1-4826-ae8d-ed3124a43af8" class="">其次注意这个Player Object，其中的Player Prefab就是玩家操控的对象（下文会介绍）auto create player就是让组件自动帮你生成这个对象（当有玩家加入链接，或者主机开通链接）method的选项就是生成方式，有随机，有依次，出生点需要创建一个spawnpoint的空对象，挂载上network start position。如果你希望自定义出生方法，需要重写networkmanager脚本，然后在OnServerAddPlayer进行修改</p><p id="dd539538-716f-4757-854a-bd7991ee4133" class="">
+</p><p id="ae23b989-99ee-487c-8131-606708689d08" class="">最后，我们还要再这个对象上添加一个传输组件，默认可以使用kcp 组件（采用的是udp传输协议）将其拖拽到Network Info 的Transport上</p><h2 id="68cc6cfc-324c-43be-9b37-393ae91fdb9c" class="">NetworkManageHUD</h2><p id="4db0d0d1-ac56-4907-b26a-1eb5802f6037" class="">这个组件是一个快速构建多人游戏的工具组件，主要是用来提供一个ui，省去自己设计ui的功夫，快速测试自己的游戏。</p><p id="69d9a2b2-de9a-4d69-a53f-c8f78ca9465d" class="">可以将这个组件添加到NetworkManager对象上，或者新建一个空对象。进入场景后会有如下ui</p><figure id="f70ad943-34e1-4ee9-99d8-3b4d7f9a32f3" class="image"><a href="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/image%201.png"><img style="width:228px" src="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/image%201.png"/></a></figure><p id="e60ff3cb-ca49-4bf5-bb91-87d29f315e30" class="">host就是建立一个主机（包括服务端和客户端）</p><p id="abb79d8a-2fb1-400b-b130-c25485d1e5e2" class="">client就是以客户端进入游戏，默认进入localhost地址（本地计算机），也就是说，你在一台电脑开两个游戏窗口，其中一个选择host另一个选择client即可以进行联机</p><h2 id="546ac0aa-e67f-465c-a380-88b18dfabfb0" class=""><strong>NetworkBehaviour</strong></h2><p id="e15780a6-fe07-44c8-8b0a-7b7a2acf1b89" class=""><a href="https://mirror-networking.gitbook.io/docs/components/networkbehaviour">Network Behaviour - Mirror (gitbook.io)</a></p><p id="26ff11b6-0358-4ddd-baa6-9f1f42de6d24" class="">networkbehaviour用来取代monobehaviour，所有要同步的脚本都应该继承networkbehaviour而不是monob，注意挂载继承该类的组件还需要同时挂载network identity component组件。</p><p id="a7f5d8e0-97d4-4a2a-a6cd-a6eba4471288" class=""><strong>isLocalPlayer：这个是一个变量，当是本地客户端拥有的player时返回真，否则返回假，用于区分和其他客户端拥有的player对象（一场游戏中，有多个player比如说控制的英雄，他们身上都挂载了相同的脚本，如果只想对本客户端拥有的英雄进行操作，则需要用到这个变量）</strong></p><p id="5a3c706c-4942-41a4-81ba-16122c92983b" class=""><strong><strong>Commands：是一个特性，用来标记某个函数是在服务器端执行，比如说你希望在客户端上收集输入，然后交给服务端来处理则需要用着个特性来标记这么一个函数。这对需要在所有客户端之间同步某些玩家操作（如射击）非常有用。Command特性保证了该方法只在服务器上执行，并且将结果发送回所有客户端以进行适当的同步。同时建议使用Command特性的函数以Cmd作为函数名前缀，同时调用cmd函数时要判断是不是localPlayer（不然会报错，并且不执行）</strong></strong></p><p id="4a87a634-8c01-4323-a1ce-1a79b1a3268f" class=""><strong><strong>Client RPC Calls：有了向服务器发出指令的command自然有服务器的回调，我们使用ClientRpc这个特性（同样，命名建议以Rpc为前缀），在状态同步中，服务器端是唯一有权限修改状态的，rpc则是让所有客户端都按照服务器的意义来同步服务器修改的状态。比如说开枪事件，服务器就需要告知所有客户端需要播放开枪声音和显示枪口。</strong></strong></p><p id="72ebabe4-1442-4f01-b77d-cb0d09837589" class="">对于Command和rpc的调用流程可以简单理解为：</p><p id="68af9266-76b6-4f29-ae74-59b24532c205" class="">client—调用command方法—&gt;server执行command方法—调用rpc方法—&gt;client执行ClientRPC方法</p><p id="97e1da38-7df0-4751-928c-4781934c189c" class="">比如说我们如果要给进入游戏的玩家一个随机的颜色，那么生成随机颜色必须在服务器端，否则各个玩家看到的颜色是不同的，比如你觉得你是蓝色，但是在比人看来你的颜色是他的客户端随机生成的颜色的颜色，而如果是由服务器来生成那么大家看到的颜色就是服务器随机生成的颜色。而服务器生成了颜色还需要告知所有客户端，这个新进来的玩家的颜色是什么，这个时候就是调用rpc。</p><pre id="b0e56d94-462e-4516-8280-0fdce30dc3b5" class="code code-wrap"><code>		[Command]
+    private void CmdSetRandomColor()
+    {
+        Color c = Random.ColorHSV();
+        RpcSetRandomColor(rc);
+    }
+    [ClientRpc]
+    private void RpcSetRandomColor(Color color)
+    {
+        SetColor(color);
+    }</code></pre><p id="fcb23e27-6fff-4093-bd0d-9e4f6c4467b5" class="">如果希望特定的客户端调用则可以使用[TargetRpc]，注意使用这个特性的函数至少要有一个NetworkConnection的形参（就是NetworkIdentity组件）</p><p id="be4ed0c4-7204-4eac-a427-4d35ca6a76e0" class=""><strong>SyncVar：是一个特性，用于标记需要同步的变量，面板上的Sync Setting就是用来设置这个的，分别是模式和同步间隔时间</strong></p><figure id="4f96b6bb-a70d-4183-ae66-14dd051407cc" class="image"><a href="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/20201130014957195.png"><img style="width:381px" src="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/20201130014957195.png"/></a></figure><h2 id="76ddb3ac-fade-4f3c-b1ee-a40c49406a36" class="">Network Transfrom</h2><p id="c1236536-c8e8-4f14-b8de-68bbc156a2e1" class="">用于同步transfrom的组件，并且提供间隔的插值</p><figure id="671b85bb-b367-4c82-b712-6f73d443f392" class="image"><a href="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/spaces_-MGmQrf2z6FL0ZpExPAn_uploads_cwKghd0kaUglT18AS0Ws_image.webp"><img style="width:421px" src="mirror%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%20953441beb4f044a69ff3c556e5346cbb/spaces_-MGmQrf2z6FL0ZpExPAn_uploads_cwKghd0kaUglT18AS0Ws_image.webp"/></a></figure><p id="bea4fa2e-6022-4ce8-9ae1-791c081f3d12" class="">一个物体可以添加多个networkTransfrom（来同步子物体的transfrom）使用networkTransfrom必须要有network Identity组件。</p><p id="4e0e637a-50bf-464c-8b54-7f0291efa7bf" class="">主要注意Target，要同步的对象，Sync Direction同步方向，如果是Client To Server的话才可以在客户端修改Transfrom位置然后同步到服务器端，否则修改Transfrom仅仅在本地生效，不在其他客户端上生效。括号内的Unreliable和reliable是两个版本，前者传输快，但是不可靠，后者反之。</p><p id="258aab15-b39e-4ebf-95be-7f6abc69a776" class="">
+</p><h1 id="9023cf32-24ef-401c-879a-d2a462c64b5d" class="">代码实例</h1><h2 id="c3ced6d0-ecb3-468d-b67b-0b6e60b5bd04" class="">移动</h2><pre id="d1730a79-b3fb-4103-910b-07dab1e6796d" class="code code-wrap"><code>private void Update() {
+        if (!isLocalPlayer) { return; }
+        float horizontal = Input.GetAxisRaw(&quot;Horizontal&quot;);
+        float vertical = Input.GetAxisRaw(&quot;Vertical&quot;);
+        Vector3 move = new Vector3(horizontal, vertical, 0) *Time.deltaTime* speed;
+        transform.Translate(move);
+				//注意要使用networktransfrom，并且传输方向是客户端到服务器端。
+    }</code></pre><h2 id="9de318f7-95b0-4b0b-97f4-53d740be8c57" class="">射击</h2><pre id="b2c6a6c8-20dd-436f-848e-4d687378b20f" class="code code-wrap"><code>		void Shoot() {
+        restCd += Time.deltaTime;
+        if (Input.GetMouseButton(0) &amp;&amp; restCd &gt; shootCd) {
+            restCd = 0;
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector2 dir = mousePos - battery.transform.position;
+            CmdShoot(dir);
+        }
+    }
+    [Command]
+    void CmdShoot(Vector3 dir) {
+        RpcFire(dir);
+    }
+    [ClientRpc]
+    void RpcFire(Vector3 dir) {
+        GameObject b = Instantiate(m_Bullet);
+        b.transform.position = transform.position;
+        var bs = b.GetComponent&lt;BulletControl&gt;();
+        bs.dir = dir.normalized;
+        bs.own = this.gameObject;
+
+    }</code></pre></div></article></body></html>
