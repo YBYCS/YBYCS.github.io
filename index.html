@@ -169,7 +169,8 @@
             const pageContainer = document.getElementById("pageCardContainer")
             //动态添加页数
             for (var i = 0; i <= data.articles.length / (maxPage + 1); i++) {
-                var str = "<div class=\"pageCard canClick selected-page\"><a href=\"/index.html?page=" + (i + 1) +
+                var str = "<div class=\"pageCard canClick selected-page\" onclick=\"window.open('/index.html?page="+
+                    (i + 1) + "','window.location.href');\"><a href=\"/index.html?page=" + (i + 1) +
                     "\" rel=\"noopener\"style=\"text-decoration:none;color:#000\">" + (i + 1) + "</a></div>";
                 pageContainer.innerHTML += str;
             }
