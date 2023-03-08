@@ -1,0 +1,682 @@
+<html>
+
+<head>
+	<base target="_blank">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>解救之途项目介绍</title>
+	<style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ac74961c-d8d7-4713-a4ad-3a3ba1623bb8" class="page sans"><header><h1 class="page-title">解救之途项目介绍</h1></header><div class="page-body"><h1 id="e7429a49-b3d3-4e6b-9b64-ffa7b34ce7ff" class="">概要</h1><p id="0745007b-5144-4b49-af9a-5e4a5e26194f" class="">解救之途是一款rougulike卡牌冒险，游戏围绕勇者解救公主展开，游戏核心围绕取舍决策，特化战术卡牌搭配，卡牌合成为设计核心。具体来说，玩家在获取卡牌时，要考虑卡牌的搭配，或者是短时间的爆发流，或者是长时间debuff吸血流，亦或者是回血乌龟流。为了实现这种效果，我使用了多个机制，其一是持有手牌代价，持有手牌需要扣取蓝量作为代价，限制玩家战术选择，同时不限制玩家最大手牌和出牌数，给予玩家十分自由的操作空间。其二是五行天赋系统，在有限的天赋点中，玩家需要搭配已有手牌或者是规划路线来谨慎选择天赋，以来形成独特的卡组。</p><h1 id="720e0edb-e284-4897-8c4a-ac0f3ba3ef24" class="">战斗机制</h1><p id="61de90df-1c75-456f-8240-7c59b32727aa" class="">生命值:hp</p><p id="1abff173-2b2a-4471-a2b3-155f29709dba" class="">魔力值:出卡 抽卡 持有卡 都需要消耗 每回合恢复 为0时会消耗生命值</p><p id="cd109ee7-69cc-458b-94e0-724e826bf505" class="">战斗力:决定攻击伤害范围 由各种buff 打怪胜利品等提升</p><p id="073a326e-1c55-43f6-aa65-e9144f45d83d" class="">合成:卡片之间可以合成 合成路线在游戏内解锁 合成后耗蓝下降(比之两个) 但是就相应的失去一些别的路线合成机会</p><p id="ad500e4e-427b-45f2-8d7f-0fb5f3522d3a" class="">原生卡:不消耗魔力 长久持有(不随着战斗结束消失,也不能再战斗中抽卡获得 在游戏内获得</p><p id="5d6eb4ee-081b-4916-858f-ddcdf9dbc7b0" class="">临时卡:抽取的卡 有不同功效</p><p id="f75afeaf-4603-4489-bebe-dab0ecc08de1" class="">属性: 五行</p><p id="257b9873-ca8b-48bb-87f4-9182d258ea4c" class="">护甲:抵御普通伤害 叠加</p><p id="37aee508-757d-4789-bda8-493ea16e2a4e" class="">护盾:抵御魔法伤害 取最高值</p><p id="3ca5e7ca-5ebe-4def-a3ea-915b9665cf79" class="">逃跑：在前4回合可以选择逃跑，丢弃部分血量作为代价</p><p id="c5d058a2-0f4a-4cd7-b61d-21973311af00" class="">背包：可以使用可在战斗中使用的道具</p><p id="3cf8244d-60f2-4e96-b22c-e258838412ce" class="">弃卡：丢弃卡牌，可以减少持有卡需要消耗的魔力值</p><figure id="4ba28430-40c0-4c65-83bd-aa3865082212" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled.png"><img style="width:896px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled.png"/></a></figure><h1 id="8211e284-1655-4857-98e7-62f2bc361f62" class="">村庄与路途机制</h1><p id="dc22cf75-3307-4808-8170-3aed6dfee670" class="">在游戏中主要有两个场景，一个是村庄一个是路途。</p><p id="f9f54264-9d55-4fed-b1f5-885d7e624c7b" class="">村庄有多种村庄，分别是不同的五行属性，每个村庄的下一个村庄有2-4个选择（随机），随机的村庄选择决定了五行天赋的加点。</p><p id="5628e972-9bf2-461c-a3e4-2fd2af411e4c" class="">村庄有多种操作可以选择，比如接取任务获得金币，购买道具，获取新卡牌等。是玩家自由决策和发育的地区。</p><figure id="0b7c3111-e53d-41c9-a27b-a6c1035e0931" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%201.png"><img style="width:884px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%201.png"/></a></figure><p id="507b3675-39f7-48dd-8793-65e5a4c6393d" class="">路途，即村庄与村庄间的路途，村庄间的路途长度也是不一样的（这也是考虑去往哪一个村庄的因素），在路途中，每天会刷出随机事件，或是奇遇或是怪物，在路途中由于没有商店，补给显得尤为重要（战斗结束，血量不会恢复）。</p><p id="8023da5c-504b-4fea-bffd-94b6f39b4ec0" class="">下图为路途中遇到怪物石头人事件示例</p><figure id="cd1bd3dd-4a62-4ee7-95c8-df071ff3bc0e" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%202.png"><img style="width:875px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%202.png"/></a></figure><figure id="955f1f78-82fd-4acf-80aa-b2800af63371" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%203.png"><img style="width:890px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%203.png"/></a></figure><h1 id="39ca640d-7baa-43e3-aeac-4290c55614b6" class="">倒计时机制</h1><p id="25c79d0e-c833-475b-8374-8e0650b1798f" class="">玩家需要在指定天数内打败boss，以来加快游戏节奏，提高玩家紧张感。</p><h1 id="6b912d63-c481-4dfb-ba82-26038212a002" class="">任务机制</h1><p id="4bd110a9-0ad5-4ae6-a832-07c14984bd7f" class="">玩家在村庄可以接取任务，任务分两种，一种是商会任务，一种是村民任务，商会任务可以获取金币，村民任务在与村民交谈中概率获取，奖励为武器，祝福，卡牌，和天赋点等。</p><h1 id="91166d24-b362-4e95-9e46-e05cf96c9127" class="">背包</h1><p id="f7037514-7dc3-4809-bf8d-94d53b281ec9" class="">部分道具为可在战斗中使用，让玩家决策如何花费金币。</p><figure id="1dbc4b83-f211-47e7-b87c-a640802a7a5d" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%204.png"><img style="width:885px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%204.png"/></a></figure><h1 id="a189d8ea-ca64-427c-a0de-7300cea386ed" class="">商店</h1><p id="abdc9379-01eb-4037-a972-0acc5e633659" class="">主要购买道具（不同村庄不同），其他村庄像素（减少路途消耗天数），天赋点</p><figure id="b8a40965-b162-4cfd-9052-e0f390c3480f" class="image"><a href="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%205.png"><img style="width:874px" src="%E8%A7%A3%E6%95%91%E4%B9%8B%E9%80%94%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%20ac74961cd8d74713a4ad3a3ba1623bb8/Untitled%205.png"/></a></figure><p id="b48b1814-6e68-4324-a304-3559f658c2e1" class="">
+</p><h1 id="22437b16-676e-4d62-bd59-e8a4f1cd620d" class="">天赋机制</h1><p id="4b7e7779-ac6b-482d-8445-0ecb288774f5" class="">在村庄中获得，有五种天赋，如下：</p><p id="02054724-d755-432a-b655-3cff294aa978" class="">木:</p><p id="1f043f03-168c-4446-bf66-6d2f3b3087cf" class="">一层 每回合回复4%的血量</p><p id="4e9ac078-82a3-4bf8-a9fd-ebeb4173d90c" class=""> 二层 血量回复量提高10%</p><p id="4cf7225b-d1ee-4871-8e0f-6da3b6ad7b9d" class="">三层 获得卡牌 东风起</p><p id="c69f83fb-16cd-4f86-8101-2b9bb5f8a8d3" class="">四层 每回合回复8%的血量</p><p id="cf7f3106-64fa-4754-b5a0-8b86fd5d82d8" class="">五层 获得卡牌 万物复苏</p><p id="50a2e4c6-d23e-4920-bfb8-87cb85513bfe" class="">六层 血量回复量提高20%</p><p id="3f5a067d-24f3-4d63-b420-499a064e0add" class="">七层 获得卡牌 生生不息</p><p id="a621e99e-1952-44fe-985a-bf386088d8d8" class="">火:</p><p id="bf5534d4-0f8e-436e-b801-22f0416cd5a0" class="">一层 每次伤害额外造成4%</p><p id="5a843768-04cc-4ab0-9d52-1316bb412c8a" class="">二层 每次伤害额外造成8%</p><p id="aa2842d6-e09c-495c-b0d0-fd8e1a1e74a0" class="">三层 获得卡牌 星火</p><p id="d36ca977-8eda-405c-a9c5-f4ab57762c99" class="">四层 每次伤害额外造成12%</p><p id="3295271e-9956-4914-805d-417c992fe099" class="">五层 获得卡牌 燎原</p><p id="28712680-d9b5-49c2-8bbd-52e3884feab8" class="">六层 每次伤害额外造成16%</p><p id="dd6a8d6d-70dc-4e53-adaa-1f02fc01f7f3" class="">七层 获得卡牌 流金铄石</p><p id="a5a1d9ff-970b-4d2f-b1bc-3e1becebd268" class="">水:</p><p id="5b90bcfb-eff2-4a2f-b0c2-9e4b0b26d445" class="">一层 蓝量回复提高8%</p><p id="5ff07870-cee3-44fa-b848-ab5d045bcd93" class="">二层 免伤3%</p><p id="a92f30a9-7b5b-4695-a54f-3c60428c1014" class="">三层 获得卡牌 滴水石穿</p><p id="f3cc04ea-5f0b-4e24-b97c-3866b80569f7" class="">四层 血量回复提高5%</p><p id="f8d11f3d-262b-40ab-b980-ff3b1dfb7b59" class="">五层 获得卡牌 惊涛骇浪</p><p id="a8f0d5fd-884d-4584-ae9c-3c12d2dbed59" class="">五层 额外造成4%的伤害</p><p id="b45af2a7-55c6-44ab-a02f-9f34021416dd" class="">七层 获得卡牌 海纳百川</p><p id="61b12844-583e-4b1b-8d20-ccd9ee817ce3" class="">土:</p><p id="c6fe3624-9f8a-45d7-8145-efd9501c5b51" class="">一层 回合开始携带20点护甲</p><p id="3007dee5-4750-43da-9ef0-090f8e87b9ca" class="">二层 5%护盾</p><p id="65e903e0-8b88-4225-9eb5-afd017992490" class="">三层 获得卡牌飞石</p><p id="5a1614e1-ba89-4793-a30c-aea1c9f60b51" class="">四层 回合开始携带50护甲</p><p id="0a53ab02-4054-4db3-b3db-64e12cfff8cb" class="">五层 获得卡牌 稳若泰山</p><p id="5688b7ab-d925-4bef-a1ab-ef301e9ec98f" class="">六层 回合开始携带15%的护盾</p><p id="7a70cc2d-72ec-47e5-9102-fc58b5338113" class="">七层 获得卡牌 坚如磐石</p><p id="b46962cf-d5b6-476a-9139-824f9ecf8d69" class="">金:</p><p id="5b3261d9-3446-4b6a-9be0-2592c8ca9672" class="">一层 攻击额外造成4%</p><p id="eeef15f7-00ad-416e-856c-e706500089ec" class="">二层 免伤4%</p><p id="71fedda8-4e59-41cc-91f9-a65c8fa3f90f" class="">三层 获得卡牌 利刃丛生</p><p id="24ed53ae-c4af-4745-b5b0-25ce9dca98c2" class="">四层 附带2%真实伤害</p><p id="20e89904-171e-403b-b8f3-9817cf463bf6" class="">五层 获得卡牌炼金术</p><p id="00288362-f6f0-408e-a901-45de8b641f51" class="">六层 免伤4%</p><p id="90c3737a-00b4-4485-ab5d-08c7d20ab9d3" class="">七层 获得卡牌剑来</p><h1 id="62ee059e-c577-4865-ba5a-173ab1a81bc0" class="">部分卡牌数据</h1><p id="36cf4d49-0824-49b5-9518-bbc237d6d142" class="">一级卡 权重50-70:</p><p id="71f7a26e-88f1-40e0-84d7-22e3c7e99651" class="">砍击:造成5-9点攻击 持有消耗1 出卡消耗0</p><p id="7d9df69d-ab1d-40f4-af97-4dcdbe3f69af" class="">照耀: 造成5-15点攻击 持有消耗3 出卡消耗9</p><p id="ce8a3b9c-0463-41c1-83cb-13c6821d8b6d" class="">炫目: 增加1-5%闪避一回合 持有消耗3 出卡消耗15</p><p id="3ed74535-0c36-4055-ac96-77a62298ad6e" class="">祝福: 恢复一定蓝5-20 持有消耗3 出卡消耗12</p><p id="67c5c600-8cef-47ac-9699-101b357e6e4d" class="">以眼还眼:造成失去的生命值的5%的攻击 上限30 持有消耗3 出卡消耗15</p><p id="e2400cc1-d24a-4ced-99fb-1daa968943b2" class="">灵魂拷问:造成1-5点攻击 1-5%对方会眩晕一回合 持有消耗3 出卡消耗10</p><p id="6e80f492-6fa7-46e4-af7a-ac7c156c2b1b" class="">乘胜追击: 敌方生命值低于10% 接下来本回合的伤害会增加10-20% 持有消耗3 出卡消耗20</p><p id="b6c498e9-3bf7-4792-ab86-c10ed86472a2" class="">电击:造成0-20点火伤害 持卡5 出卡15 </p><p id="419f5b4a-25b2-48a9-9008-7a194cda9a1d" class="">洞悉弱点 对方增加一层易伤</p><p id="6717de76-f014-4305-b8a3-acaa17161f74" class="">暗箭 每次造成的伤害附带2点真实伤害</p><p id="a79db49b-fada-43b3-b832-4bbd30ddef5f" class="">
+</p><p id="a9587c54-392d-4f3c-ae32-c4471bd1f8dd" class="">
+</p><p id="96d9ad92-3be6-43fa-8a6c-f8e2b4c8ba7f" class="">二级卡 权重30-50:</p><p id="f4f4d6c4-2103-4688-b430-7d90842ced7d" class="">致命打击: 敌方生命值低于10% 接下来本回合的伤害会增加20-30% 持有消耗10 出卡消耗30</p><p id="1a4cf464-89fb-4cb7-a019-4759c3af1c09" class="">鹰眼: 本回合无视敌方护甲30% 持有10 出卡消耗20</p><p id="2de5c22c-d250-4ae3-a53f-e6468a015542" class="">破釜沉舟: 和自由选择三张卡一起出 造成 5-25点伤害 持有消耗5 出卡消耗25</p><p id="192127f2-731a-4b09-89cc-a8cd8648d276" class="">瘟疫:地方中毒+1(上限10)</p><p id="020c9009-61a4-4a6f-8554-eb0332ca0bd8" class="">天选之人:造成5点伤害 抽取一张卡 持有3 出卡消耗20</p><p id="a3b3421a-1cf0-4d40-bebb-8ae207aaef8a" class="">胜利的天平:5回合后 若己方的血量百分比高于敌方 则造成敌方40点伤害 否则造成己方20点伤害 持有消耗 7 出卡消耗20</p><p id="6479b40a-e5b9-4aa5-b8bc-217048e9c5b1" class="">命运的轮盘:随机失去两张牌 造成20-40点伤害 持有10 出卡消耗20</p><p id="eff7f4c3-7676-4025-9412-4a9c7215461c" class="">蓄力一击:本回合不能行动 下回合将造成20-40点伤害 持有8 出卡消耗20</p><p id="637e7042-66b1-426d-86a2-5574a2c2f3d9" class="">光盾:造成5-10点伤害下回合的每次被攻击受到的伤害减少10 持有8 出卡消耗18</p><p id="5b9dd79e-061c-41f3-930e-cbf9ffbe7a86" class="">神之祝福:恢复生命值,蓝10点持有5 出卡消耗0</p><p id="4fa53492-35b0-40b9-a44a-0ce0865948c6" class="">后人的智慧:在一回合内增加50护甲值 在三回合后扣除70护甲(超过上限则扣血)</p><p id="18f1fa0c-f2a9-42d6-8dfc-ec17f0c7999a" class="">昏睡红茶:概率使得敌方进入昏睡 昏睡:不能行动 收到攻击立即醒来 不收到攻击时候有概率醒来</p><p id="a9dee5cf-e2e5-4cc8-8989-03318710f128" class="">冰封:造成一层冰冻 冰冻:每层增加1%的冻结概率 被冻结会跳过该回合 上限30层</p><p id="cb41d309-0a92-4251-998c-624aa076513b" class="">快速施法:本回合出卡需要消耗的蓝量减少35%</p><p id="abbbe39c-9565-4607-9289-47947208662f" class="">梦魇:造成一层恐惧</p><p id="e9e12d4f-d29b-4604-ba94-d06720357746" class="">东风起:回复20点血</p><p id="9e06f43e-c562-41ee-b31c-b631ce90e28e" class="">星火:造成火种4层 燃烧每层造成2点真实伤害 火系每回合衰减2层</p><p id="ea62ee56-2f1d-4b8a-b7ee-8b366035c6b7" class="">川流不息:造成滴水1层 滴水每层造成1点物理伤害 水系 无衰减</p><p id="fe0597a2-fe16-4410-a856-29c2452a7b37" class="">飞石:造成25点伤害</p><p id="098859e5-313f-4b23-aa24-376fee6b5fee" class="">利刃丛生: buff达摩克利斯之剑 1/2无事发生 1/2造成40点伤害</p><p id="d0cdfae1-c592-448b-aa30-c8b84e44ac7c" class="">废物利用 该回合每弃一张牌造成4点伤害</p><p id="74518b5c-0cd3-4be7-b7cf-2dfa1495a536" class="">兴奋 回复10点蓝量并且抽一张卡</p><p id="309536f2-c4d9-4238-ba76-86b3c16032df" class="">不变应万变 下回合开始每次对你造成3点伤害将获得一张手牌</p><p id="f344d857-24ae-4794-a21e-9c9dd0fe62b8" class="">不破不立 丢弃所有手牌并且抽取相同数量的卡牌
+空城计 丢弃所有手牌每张回愎10点血</p><p id="99f631ba-8f40-4805-9d33-83c0cc4736cd" class="">尽力 造成当前生命值的5%真实伤害</p><p id="af80ca20-f922-4975-88ad-e810f42bae00" class="">嘲讽 对下回合如果攻击不足20点则扣15点血</p><p id="821a0093-4c63-494b-b5f7-1bdb12afcba1" class="">起雾了 双方获得20%闪避</p><p id="6cb42d87-ab6b-4bbc-89ef-48facbce3366" class="">
+</p><p id="9eb60c8c-b1a6-456e-8df2-dc7938ad382d" class="">三级卡 权重10-15:</p><p id="b1c2299f-0971-433d-b700-6acf28ab7ae5" class="">//todo 减少蓝量恢复</p><p id="12a102f5-e571-4c9d-91e4-6dc75a202c2e" class="">引雷:增加一层导电属性,满三层时造成300点伤害 每三回合掉一层(上限5层)</p><p id="c6267ad8-9cf2-4955-b05a-34abdcce9aae" class="">雷霆万顷:造成100点 火伤害 每层导电而外增加20点真实伤害</p><p id="0143ccf7-f21a-44f4-8f62-35d73f4ba38d" class="">冰封万里:造成五层冰冻</p><p id="4a020c4d-1a3f-48eb-bf92-f7cd05321d4a" class="">祸福所依:清除自身的所有buff</p><p id="509d4d9f-db3e-4f3d-985f-dd1146f0eba2" class="">高效施法:本回合出卡需要消耗的蓝量减少75%</p><p id="b9118c1d-ff55-4bd3-a22e-f72845ffa037" class="">深渊凝视:造成5层恐惧 恐惧:每层加2%不能抽卡的概率上限20层 3回合衰减一层</p><p id="e564862f-1df6-42fe-bfc5-644fde9e5e65" class="">燎原:点燃火种 使 每火种层数翻倍 然后每层造成5点火系真实伤害</p><p id="cd0ea475-aee7-49dc-9654-8c6e74a0416e" class="">万物复苏:清除所有负面buff</p><p id="b1adddc2-c983-44d5-b740-16c3874a508a" class="">惊涛骇浪:造成2层恐惧 30%造成眩晕 眩晕跳过该回合 70%解除眩晕状态</p><p id="5df97c34-b252-4612-a64d-47ece3cfbc2a" class="">稳若泰山:接下来3回合 每回合回复15%的血量</p><p id="15fb1e1f-0d10-48f4-908a-f14cb278c50f" class="">恶魔附身:在接下来的三回合中 伤害提升至250% 若没能杀死敌方 则在结束后扣除50%的血量</p><p id="bf44232b-e0e3-4184-a13f-cfe00609bc16" class="">炼金术:加任意一张二级卡即可合成一张随机四级卡</p><p id="db844cbf-03e3-4d7d-9a81-1f90eeb94429" class="">裁决:对血量低于10%的 进行致命一击</p><p id="f9519f35-bd63-475a-b970-ac5c18420dd8" class="">隐忍:持有回合数越久伤害越高</p><p id="6d78e90b-bc97-4367-9747-7637f7b85547" class="">真别急 对手获得急了的buff</p><p id="8dcda78f-4a5c-403c-a833-acad6ea885a6" class="">互相伤害:双方都获得易伤</p><p id="34a742b0-2260-46e8-9e1d-a062ec6b0842" class="">同态 下回合 你所收到的伤害将同样造成给对方</p><p id="5f02c702-d014-4b03-81a9-f6e0032ad3c0" class="">雪上加霜 对每层冰冻额外造成伤害 并且继续造成冰冻状态</p><p id="b8dd6ca8-e0b8-4e13-84b4-fc5efde2f4cc" class="">冻手 造成冰冻</p><p id="69cb95ad-d0e5-43f0-b1ec-44c28c34540b" class="">
+</p><p id="573530f3-a86c-4057-8023-80ad0083e182" class="">
+</p><p id="f5cce7e9-3425-4203-ab44-d022d541f50a" class="">四级卡:</p><p id="fd4ecb08-53ce-40c9-9ec0-23d49940e13b" class="">灾厄降临: 一回合伤害提升700% 若没能击杀则扣除90%血量 持有 20 出卡50</p><p id="75ba11d6-bf09-4dca-9695-ad39684eb9bc" class=""> 殊死一搏: 有30/50/70%与敌人交换血量百分比</p><p id="6d953cc0-44f4-4463-9087-6a6143e19109" class="">卧薪尝胆:接下来3个回合无法出牌 3回合后伤害提升至300% 持续3回合</p><p id="cc672b5b-e6df-4a73-8bd4-f24bc8690bc8" class="">不屈:在3回合内 血量不会小于1</p><p id="0b07467d-6327-4b56-92c6-9db1653e3d04" class="">全力以赴:接下来5个回合被跳过 但是会发动致命一击 基础伤害300的真实伤害</p><p id="3f05515e-0f0b-40b8-976c-199c09e5353f" class="">饮血:在接下来的3个回合 回复50%所造成的伤害</p><p id="f6ef9330-720e-4ab4-ac10-1b1981fddd88" class="">凌冬将至:每层冰冻将造成2%血量的真实伤害 但是会移出所有冰冻层数</p><p id="bfb51c5c-b3ab-40d6-83a4-0529275b2249" class="">福运:随机获取两张已有的4级卡牌</p><p id="046dbcca-ec78-4661-b3d7-a89d176e130a" class="">回旋余地:在7/8/9/10回合后 对敌人造成巨额伤害</p><p id="11308990-7f44-45f9-bf32-b28ea4c47c74" class="">幸运七号:双方相同概率扣除50%点血</p><p id="37f3fd55-c914-4b6c-b1b3-53032d57d816" class="">生生不息:如果在本回合死亡 则复活并回复30%的血 获得buff 顽强 持续5回合 没回合减伤30%</p><p id="344d83fa-0fe0-456a-90d5-855b5f949c1d" class="">流金铄石:在接下来5回合 每回合添加5层火种</p><p id="7661495b-c614-4f0f-9490-6cbe4c8902c9" class="">海纳百川:回复50%受到的伤害 持续5回合</p><p id="22419d29-8a71-4035-ae03-5c18a1cdec2b" class="">坚如磐石:在接下来5回合 免除75%的伤害</p><p id="f0cdea13-fa86-46d6-b9e2-23e6e1d74327" class="">剑来:获得剑来buff 剑来持续三回合 第一回合提高物理伤害50% 第二回合提高法术伤害50% 伤害额外造成25%的真实伤害</p><p id="195d93c1-9dac-4d1f-a808-0c9d3e18484d" class="">我是天选也是唯一 每回合回复15%的血 持续至结束</p></div></article></body></html>

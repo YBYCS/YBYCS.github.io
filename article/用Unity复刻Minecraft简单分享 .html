@@ -3,7 +3,7 @@
 <head>
 	<base target="_blank">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>如何使用github的action自动在服务器上拉取最新提交</title>
+	<title>用Unity复刻Minecraft简单分享</title>
 	<style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
@@ -672,42 +672,84 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="c038baee-3f15-4e92-ac06-df1b8d998cd3" class="page sans"><header><h1 class="page-title">如何使用github的action自动在服务器上拉取最新提交</h1></header><div class="page-body"><h1 id="4392e640-5410-436c-93c3-2904bb9ba3ee" class="">代码：</h1><pre id="f9e2a5b2-a997-4edb-8a92-bbd15c921285" class="code code-wrap"><code># auto_build
-name: auto deploy blog to ecs
-on:
-  push:
-    branches:
-      - main
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{secrets.SERVER_SSH_KEY}}
-          script: |
-            cd /var/www/html
-            git pull origin main
-            sudo service nginx restart</code></pre><h1 id="79a26f60-9f73-480a-8472-15c12033b601" class="">什么是action？</h1><p id="ca594a8a-edcf-4115-b53b-0706c7186bd3" class="">简单来说，就是你写一段代码（workflow)，然后根据你设定的触发条件，将会在特定情况下，使用github提供的服务器来执行你的代码。</p><p id="1cbde95a-6553-4d7a-9474-ab9d4076e66e" class="">以下是详细回答。</p><p id="d24a70d6-c2c0-4e0f-8664-b5f0242b9615" class="">GitHub Actions 是 GitHub 提供的一种基于事件触发的工作流自动化服务。它允许用户在自己的仓库中配置自动化任务，在特定事件发生时自动执行。</p><p id="08e1fd78-d9be-43c5-b007-244a4602b049" class="">例如，您可以使用 GitHub Actions 设置自动化构建、测试、部署等任务。每当您推送新代码到您的仓库时，GitHub Actions 就会自动运行您配置的任务来对新代码进行构建、测试和部署。</p><p id="1f579056-3307-42d6-8ffa-09fb5752eb98" class="">GitHub Actions 使用 YAML 文件配置任务，您可以在仓库的 .github/workflows 目录中创建一个 YAML 文件来配置任务。</p><p id="f9906ddd-0aa5-48d6-aef9-69e29387e1ff" class="">它也可以用来自动化软件开发工作流程，例如持续集成和持续交付。可以使用现有的第三方 Actions 来完成常见的工作流程，也可以自己编写自定义 Actions。</p><h1 id="20c1dd1a-7499-4b62-aa6e-2be087788f30" class="">如何创建workflow</h1><figure id="e14335cd-c35a-49fa-91f8-033ac4e91370" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled.png"><img style="width:976px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled.png"/></a></figure><figure id="e29ad0e9-e51b-424c-b477-a8388d7f3e5d" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%201.png"><img style="width:975px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%201.png"/></a></figure><p id="93fc8a91-783b-4823-937e-1b79e009c860" class="">顺带一提</p><figure id="8fe17055-25c2-442c-9c06-d6e7a0f91016" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%202.png"><img style="width:1288px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%202.png"/></a></figure><p id="715a05f3-deee-496e-a861-d334a3415b02" class="">这些是别人的工作流，你可以选择使用。</p><h1 id="acea3c8e-b503-4d47-ae18-dcccf1bb6984" class="">如何写代码</h1><p id="d873044e-88b0-4382-8da9-dec153e12590" class="">这里是官方文档：<a href="https://docs.github.com/en/actions">GitHub Actions Documentation - GitHub Docs</a></p><p id="ddf84e4d-b1d5-4436-b8b2-8f4886d72f96" class="">回到一开始的代码：</p><pre id="9590d7f1-8f1a-4b22-b658-1ed94e83fc2e" class="code code-wrap"><code># auto_build
-name: auto deploy blog to ecs
-on:
-  push:
-    branches:
-      - main
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{secrets.SERVER_SSH_KEY}}
-          script: |
-            cd /var/www/html
-            git pull origin main
-            sudo service nginx restart</code></pre><p id="5a865544-2520-49c5-8bf5-9f5832025c84" class="">#是注释</p><p id="f304e0ee-5350-4b25-a6a1-c51fface1243" class="">name是工作流的名称</p><p id="4c63377f-f0cb-4a57-8563-7e9173cf9b2f" class="">on是执行条件，这里是当有push的时候 push的参数branches指限定哪一个分支有push，这里是main分支有push则执行工作流</p><p id="828c9827-3332-4f88-b610-3592d4d46d67" class="">job就是github要执行的任务，这里有个叫build的任务，runs-on指定在ubuntu最新版本上执行</p><p id="965af716-b525-46d8-b078-4486492076a5" class="">setps列出了这个任务的每一个步骤</p><p id="c4eaddfe-38f4-40b5-832d-ca0fbf589e6f" class="">name就是指定这个步骤的名称</p><p id="b8fbaf46-0d32-412f-ad17-182b492b5d56" class="">uses：代表使用什么来执行操作，这里是使用appleboy/ssh-action 这个第三方 action 来执行这个步骤。</p><p id="fe5fced2-30aa-46f5-81c9-06c57c75dd5b" class="">with则是这个action的一些参数，包括ip,用户名，ssh的值，script是要执行的代码 | 表示执行几行的代码</p><p id="e3a9f3eb-b2e9-4824-8d18-c8268da5d5d8" class="">secrets.SERVER_HOST是什么呢，指存储在secrets中的SEVER_HOST变量，因为如果直接写在代码上会泄露。</p><p id="9b1e52e2-73f7-4b52-85c9-ca261fcce33c" class="">具体的创建方法是：</p><figure id="2412c0c1-3fb6-43d7-8112-c1f041363016" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%203.png"><img style="width:1450px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%203.png"/></a></figure><p id="ad56aeef-87ae-4b82-993a-476c814c411a" class="">注意创建的名称不用加前缀secrets.</p><p id="76633620-6b93-46a3-91ce-89d28dcde809" class="">host 和 username都很好理解，就是服务器的ip地址和用户名，而ssh就是通过秘钥来登陆服务器。</p><h1 id="c34ee6e3-7c2f-4fd6-acea-3ec859c9ef78" class="">如何创建ssh</h1><p id="94925e45-3676-42df-8539-cdee04de2fd0" class="">这里以阿里云为例，网络上有各种文章介绍。</p><p id="6c5845c5-0858-45ae-a75b-9a77e63542d7" class="">如何创建密钥对：<a href="https://help.aliyun.com/document_detail/51793.htm?spm=a2c4g.11186623.0.0.5dfc4636Hjxz9c#concept-wy4-th1-ydb">创建SSH密钥对 (aliyun.com)</a></p><p id="eefd7320-40d5-4965-a509-279ea799cf46" class="">注意创建完后要重启服务器才生效（同时不能再使用密码登陆，要修改为密码登陆可以参考：<a href="https://blog.csdn.net/xiaomu370/article/details/122396218">文章</a>。</p><p id="1702c7f2-1bff-4bad-b637-d63ca8cf9147" class="">创建完后会自动下载一个后缀为pem的文件，记事本打开复制，这就是secrets.SERVER_SSH_KEY的值</p><p id="c603970b-6b6e-4ad1-898a-765cd2d4bf08" class="">大功告成。</p><p id="bac7d1dc-49e4-4c5d-9431-630eb6444ef2" class="">注意，执行代码的返回消息在：</p><figure id="14322549-6180-4eb1-a758-49a60b7a0f78" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%204.png"><img style="width:1704px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%204.png"/></a></figure><figure id="27522295-6f49-449a-b066-a710b7179bec" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%205.png"><img style="width:703px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%205.png"/></a></figure><figure id="a130fe5d-835e-4c3c-b031-8f52632c7701" class="image"><a href="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%206.png"><img style="width:866px" src="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E7%9A%84action%E8%87%AA%E5%8A%A8%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%8B%89%E5%8F%96%E6%9C%80%E6%96%B0%E6%8F%90%E4%BA%A4%20c038baee3f154e92ac06df1b8d998cd3/Untitled%206.png"/></a></figure><p id="f71ddc95-9173-457d-b5c3-287d2b383b40" class="">中查看。</p><p id="26b890cc-4630-4e0f-8477-6145a01f9c49" class="">部署完后网页没有更新可以刷新下清除缓存。</p></div></article></body></html>
+</style></head><body><article id="c1eea859-2309-4cff-b6ae-04326d91d3fc" class="page sans"><header><h1 class="page-title">用Unity复刻Minecraft简单分享</h1></header><div class="page-body"><h1 id="d61acade-0ba1-4ebe-98cc-5713dab9d359" class="">渲染方块</h1><p id="2a6827e8-b15f-496a-ba65-fa1409e5c098" class="">在MC中，方块并不是一个3D模型，所有方块都是用4个面来构成的，一开始我选择使用Sprite Render来渲染面，但是这需要创建过多的对象，渲染会非常吃力DrawCall调用太多了，为了解决这个问题，我使用MeshRender来渲染，而且是一个MeshRender负责一个区块的渲染（16*16*256个方块的范围）。</p><p id="cb4134bc-ee48-46e4-b53f-2b2dba5e6d08" class="">具体操作是遍历需要渲染的方块信息，然后我们将能看到的面的信息添加到MeshRender中，这样可以减少渲染消耗。</p><p id="2b244caa-308e-4596-a766-3f7653d61fb6" class="">代码参考：</p><pre id="0ba13c3d-cffd-4834-9bbe-c6f60946441f" class="code code-wrap"><code>void AddFace2Mesh(int id, Vector3 position, List&lt;Vector3&gt; vertices, List&lt;int&gt; triangles, List&lt;Vector2&gt; uvs, Face face, int count, Rect[] rects) {
+        Vector3[] v = GetFaceVertices(face);
+        Vector3 v1 = v[0] + position;
+        Vector3 v2 = v[1] + position;
+        Vector3 v3 = v[2] + position;
+        Vector3 v4 = v[3] + position;
+        vertices.Add(v1);
+        vertices.Add(v2);
+        vertices.Add(v3);
+        vertices.Add(v4);
+        triangles.Add(0 + count);
+        triangles.Add(1 + count);
+        triangles.Add(2 + count);
+
+        triangles.Add(0 + count);
+        triangles.Add(2 + count);
+        triangles.Add(3 + count);
+        //取顶面
+        //var rect = rects[map.position[i, j, k]%3];
+
+        //TODO
+        id--;
+        id *= 3;
+        id += face switch {
+            Face.Top =&gt; 0,// 如果 face 为 Top，增量为 0
+            Face.Bottom =&gt; 2,// 如果 face 为 Bottom，增量为 2
+            _ =&gt; 1,// 其余情况下增量为 1
+        };
+        var rect = rects[id];
+        uvs.Add(new Vector2(rect.xMin, rect.yMin));
+        uvs.Add(new Vector2(rect.xMax, rect.yMin));
+        uvs.Add(new Vector2(rect.xMax, rect.yMax));
+        uvs.Add(new Vector2(rect.xMin, rect.yMax));
+
+    }</code></pre><p id="0df08edd-8852-407a-bc0e-7d519ee1be08" class="">上述代码主要将面的信息添加到MeshRender中，并且指定贴图范围，为什么要指定这个呢，因为一个区块中（16*16*256个方块范围）有多种方块类型，每种方块的贴图是不同的，为了提高效率，我将所有方块的面加载到贴图上，然后渲染某个面的时候再读取。</p><p id="fc05f54a-47e3-4f5a-889e-0ba80a422178" class="">代码参考:</p><pre id="72d10843-07af-4cfa-8feb-c03cfae7219e" class="code code-wrap"><code>Texture2D atlas;
+    Rect[] rects;
+    List&lt;Texture2D&gt; textures;
+    void CreateAtlas() {
+        //Texture2D[] textures;
+        atlas = new Texture2D(2048, 2048);
+        //textures = new Texture2D[2048];
+        textures = new();
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/dirt&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/dirt&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/dirt&quot;));
+
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/water_overlay&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/water_overlay&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/water_overlay&quot;));
+
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/grass_top&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/grass_side&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/grass_side&quot;));
+
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/cobblestone&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/cobblestone&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/cobblestone&quot;));
+
+
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/snow&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/grass_side_snowed&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/dirt&quot;));
+
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/ice&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/ice&quot;));
+        textures.Add(Resources.Load&lt;Texture2D&gt;(&quot;Blocks/ice&quot;));
+
+        AddTex(&quot;Blocks/log_oak_toplog_oak_top&quot;);
+        AddTex(&quot;Blocks/log_oak&quot;);
+        AddTex(&quot;Blocks/log_oak_toplog_oak_top&quot;);
+
+        AddTex(&quot;Blocks/leaves_oak&quot;);
+        AddTex(&quot;Blocks/leaves_oak&quot;);
+        AddTex(&quot;Blocks/leaves_oak&quot;);
+
+
+        rects = atlas.PackTextures(textures.ToArray(), 1, 2048);
+        atlas.filterMode = FilterMode.Point;
+    }</code></pre><p id="32c60179-9fec-41d3-a846-96343dd9c422" class="">这部分值得注意的是添加面的顶点信息是要逆时针，同时由于透明方块的存在，透明方块应该是单独的一个MeshRenderer或者单独的材质。</p><h1 id="7521ffd9-bd1d-4633-9609-f40d31b7b14d" class="">地形的生成</h1><p id="11be5340-4533-4998-87e2-64ff06be56ac" class="">首先我们要先考虑如何存储方块信息，我使用的是多个三维数组来储存，每个三维数组（区块）储存16*256*16大小的方块信息，根据玩家的位置来创建新的区块。</p><p id="6f51fc43-4bbc-42e1-bfb6-3e6488fd8a41" class="">每个区块的生成主要是通过各种噪声图来实现，我们首先要生成高度，对于每一个x,z坐标，我们应该生成一个对应的最大高度，最大高度之上的空气（没高过海平面的则为海水），最大高度之下的为泥土，石头等，最下五层的基岩，如何生成高度呢？可以直接使用unity的柏林噪音函数来生成。</p><p id="0de9bd57-7c1f-4c64-9f36-b72707570d0b" class="">具体来说就是生成玩家会看到的区块，对于每个要生成的区块，遍历所有xz坐标获取高度，然后根据高度遍历整个高度，根据预设规则生成方块信息。</p><p id="7a8bce7b-fd9f-4b03-aec2-1204f9797435" class="">同时为了生成更加复杂多样的地形，我们可以采用多个噪音的叠加，赋予不同的频率和极值。</p><p id="5084b0b0-86ae-469c-b4d6-44f1588c63f5" class="">对于洞穴地形，我们同样可以使用噪音生成，比如三维的柏林噪音，但这样生成的噪音往往是不规则的，对于某些特殊的规则的峡谷可以通过变换频率来生成。</p><p id="3a9a56cc-6cf1-4ff7-b561-df35d0a6c44e" class="">
+</p><h1 id="a38f8b06-3513-4684-a6d2-0634f83934d1" class="">生物群系</h1><p id="ed41e663-6a9e-44bf-a40e-26aaea176796" class="">MC中有多种的生物，分布在不同的环境中，如何决定一个环境主要依靠两个参数，一个是温度，另一是湿度。温度和湿度的生成同样使用噪音函数，值得注意的是温度还与高度有关。</p><h1 id="b4117693-9ce3-4726-92fa-f9776b5bf36c" class="">生成建筑</h1><h2 id="1d036032-9bbd-4289-89b1-3d7a344973a8" class="">小型建筑</h2><p id="8aebf62b-2445-495f-9939-b10c7ec42698" class="">这里举例树是如何生成的，我主要是通过噪音，温度，湿度，随机值来决定一个点（最高点）是否生成树，数的生成可以放在地形生成之后再遍历所有的点进行生成，一般来说根据温度，湿度来决定树的大小和颜色，将预设的树的信息加载到对应的地图数据中</p><h2 id="a3e5f9f0-cf0a-46e9-b787-f92dd4202f1b" class="">大型建筑</h2><p id="226b91db-cdc0-47d3-acb9-294c54b34ced" class="">这里就是村庄了，村庄的生成是否麻烦，因为不方便直接使用预设的模型数据生成，可能会与地形不适配，这里我们应该要做的是找到一块适合生成村庄的地。</p><p id="74f9080d-7fd9-423e-9dee-41c43ee93149" class="">首先我们先遍历所有的点，随机挑选一些作为村庄的源点，有了源点我们需要判断周围的地块是否适合生成村庄，生成多大的村庄。这里我才去了DFS来获取周边的点的信息来判断是否适合生成村庄，我们从源点出发，遍历周围的点，根据周围的点相对于源点的坡度来判断周围的点是否适合生成村庄，迭代若干次，我们就能获取到适合生成村庄的区域（这些点相对平坦）。再次基础上我们可以相当于将这些点夷为平地（这些点本身不一定是完全平坦的即高度会有偏差，我们根据源点的高度将选中相对偏差不大的点形成的区域夷为平地）在这一块地我们将我们设定好的村庄的某些建筑放入。</p><p id="0093280f-8244-4fdc-879f-950006cee8eb" class="">道路的生成可以通过A*算法来实现。</p><h1 id="e3e438a0-5efe-4683-ad98-d4c2b55ab328" class="">MeshRender到实体的转换</h1><p id="5cb67009-6895-4585-b902-b494c7f6d7b6" class="">以上篇章我们主要是解决生成渲染的问题，如何交互呢？</p><p id="7e96f2ba-9499-4ca0-9234-51ead36dc29a" class="">我们给MeshRenderer的物体套上一个不规则碰撞器（直接使用Mesh）通过射线检测玩家所要交互的方块，对于处于方块交互。</p><p id="9fd19308-c834-4a5b-aa2a-30f23b57d25d" class="">对与处于交互的方块，我们根据其位置生成一个方块实体（比如说由6个Sprite Renderer组成的物体，或者单独的MeshRenderer方块），其交互方式由其脚本控制，并且删除对应的Mesh信息。</p><p id="6cc0736a-93fa-4338-a4c2-1d6f030e3f38" class="">比如说，沙子会受到重力的影响，要实现这个功能我们要对每个方块的消失做监听，当方块消失后，监测该方块上方是否有沙子，如果有，则删除该沙子在Mesh中的信息（顶点，面，uv信息）然后再对应位置生成对应的单独方块实体，当沙子重新到达地面（由沙子实体挂载的脚本来监听），我们再将沙子的新信息更新到Mesh中，删除对应的实体。</p><h1 id="8d984ec3-55fb-48c9-92d4-b61af13267a7" class="">效果展示</h1><figure id="9cef1639-d481-425d-a9b4-d48104b87250" class="image"><a href="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled.png"><img style="width:1101px" src="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled.png"/></a></figure><figure id="569ccf69-7888-45a3-a419-8d9f05f518b3" class="image"><a href="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled%201.png"><img style="width:1118px" src="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled%201.png"/></a></figure><figure id="0f1f8c76-96b4-4509-97b0-334a623b66df" class="image"><a href="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled%202.png"><img style="width:1133px" src="%E7%94%A8Unity%E5%A4%8D%E5%88%BBMinecraft%E7%AE%80%E5%8D%95%E5%88%86%E4%BA%AB%20c1eea85923094cffb6ae04326d91d3fc/Untitled%202.png"/></a></figure><h1 id="b7c04d25-3c95-40ad-9e50-a2c1b6b92c1d" class="">项目链接</h1><figure id="4dc64464-73b4-4ba3-b2ae-9ac936a59b18"><div class="source">https://github.com/YBYCS/MC</div></figure><p id="6cbb862e-c050-4536-b9e3-59ad13c6bdb0" class="">
+</p></div></article></body></html>
